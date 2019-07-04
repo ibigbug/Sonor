@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		424E7BCF22CBA5CC00B627BC /* CameraWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E7BCE22CBA5CC00B627BC /* CameraWrapper.swift */; };
+		42A2DE0822CE0F4500CC6F84 /* TestUIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A2DE0722CE0F4500CC6F84 /* TestUIControl.swift */; };
+		42A9CFEE22CDE0F600A22C25 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9CFED22CDE0F600A22C25 /* opencv2.framework */; };
+		42A9CFF422CDE1C300A22C25 /* CVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42A9CFF322CDE1C300A22C25 /* CVWrapper.mm */; };
+		42A9CFF922CDE55B00A22C25 /* ShotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A9CFF822CDE55B00A22C25 /* ShotView.swift */; };
+		42A9CFFB22CDEB1A00A22C25 /* CameraAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9CFFA22CDEB1A00A22C25 /* CameraAPI.a */; };
 		42DA752922CB75C4002F1492 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA752822CB75C4002F1492 /* AppDelegate.swift */; };
 		42DA752B22CB75C4002F1492 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA752A22CB75C4002F1492 /* SceneDelegate.swift */; };
 		42DA752D22CB75C4002F1492 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA752C22CB75C4002F1492 /* ContentView.swift */; };
@@ -16,6 +22,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		424E7BCE22CBA5CC00B627BC /* CameraWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWrapper.swift; sourceTree = "<group>"; };
+		42A2DE0722CE0F4500CC6F84 /* TestUIControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIControl.swift; sourceTree = "<group>"; };
+		42A9CFED22CDE0F600A22C25 /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = opencv2.framework; sourceTree = "<group>"; };
+		42A9CFEF22CDE17A00A22C25 /* Sonor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sonor-Bridging-Header.h"; sourceTree = "<group>"; };
+		42A9CFF322CDE1C300A22C25 /* CVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CVWrapper.mm; sourceTree = "<group>"; };
+		42A9CFF622CDE30C00A22C25 /* CVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVWrapper.h; sourceTree = "<group>"; };
+		42A9CFF722CDE34400A22C25 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		42A9CFF822CDE55B00A22C25 /* ShotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShotView.swift; sourceTree = "<group>"; };
+		42A9CFFA22CDEB1A00A22C25 /* CameraAPI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = CameraAPI.a; path = CameraAPI/CameraAPI.a; sourceTree = "<group>"; };
 		42DA752522CB75C4002F1492 /* Sonor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42DA752822CB75C4002F1492 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42DA752A22CB75C4002F1492 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -31,17 +46,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42A9CFEE22CDE0F600A22C25 /* opencv2.framework in Frameworks */,
+				42A9CFFB22CDEB1A00A22C25 /* CameraAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		424E7BC222CBA09900B627BC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42A9CFED22CDE0F600A22C25 /* opencv2.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		424E7BCD22CBA5BE00B627BC /* CameraAPI */ = {
+			isa = PBXGroup;
+			children = (
+				424E7BCE22CBA5CC00B627BC /* CameraWrapper.swift */,
+			);
+			name = CameraAPI;
+			sourceTree = "<group>";
+		};
 		42DA751C22CB75C4002F1492 = {
 			isa = PBXGroup;
 			children = (
 				42DA752722CB75C4002F1492 /* Sonor */,
 				42DA752622CB75C4002F1492 /* Products */,
+				424E7BC222CBA09900B627BC /* Frameworks */,
+				42A9CFEF22CDE17A00A22C25 /* Sonor-Bridging-Header.h */,
+				42A9CFFA22CDEB1A00A22C25 /* CameraAPI.a */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +92,7 @@
 		42DA752722CB75C4002F1492 /* Sonor */ = {
 			isa = PBXGroup;
 			children = (
+				424E7BCD22CBA5BE00B627BC /* CameraAPI */,
 				42DA752822CB75C4002F1492 /* AppDelegate.swift */,
 				42DA752A22CB75C4002F1492 /* SceneDelegate.swift */,
 				42DA752C22CB75C4002F1492 /* ContentView.swift */,
@@ -63,6 +100,11 @@
 				42DA753322CB75C7002F1492 /* LaunchScreen.storyboard */,
 				42DA753622CB75C7002F1492 /* Info.plist */,
 				42DA753022CB75C7002F1492 /* Preview Content */,
+				42A9CFF322CDE1C300A22C25 /* CVWrapper.mm */,
+				42A9CFF722CDE34400A22C25 /* PrefixHeader.pch */,
+				42A9CFF622CDE30C00A22C25 /* CVWrapper.h */,
+				42A9CFF822CDE55B00A22C25 /* ShotView.swift */,
+				42A2DE0722CE0F4500CC6F84 /* TestUIControl.swift */,
 			);
 			path = Sonor;
 			sourceTree = "<group>";
@@ -107,6 +149,7 @@
 				TargetAttributes = {
 					42DA752422CB75C4002F1492 = {
 						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
 					};
 				};
 			};
@@ -146,9 +189,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				424E7BCF22CBA5CC00B627BC /* CameraWrapper.swift in Sources */,
 				42DA752922CB75C4002F1492 /* AppDelegate.swift in Sources */,
+				42A9CFF422CDE1C300A22C25 /* CVWrapper.mm in Sources */,
 				42DA752B22CB75C4002F1492 /* SceneDelegate.swift in Sources */,
+				42A9CFF922CDE55B00A22C25 /* ShotView.swift in Sources */,
 				42DA752D22CB75C4002F1492 /* ContentView.swift in Sources */,
+				42A2DE0822CE0F4500CC6F84 /* TestUIControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,17 +331,33 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Sonor/Preview\\ Content";
 				DEVELOPMENT_TEAM = A4HU2V65N5;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CameraAPI",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/CameraAPI";
 				INFOPLIST_FILE = Sonor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CameraAPI",
+				);
+				MODULEMAP_PRIVATE_FILE = "$(SRCROOT)/CameraAPI/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.watfaq.Sonor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/CameraAPI";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sonor-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -304,17 +367,32 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "Sonor/Preview\\ Content";
 				DEVELOPMENT_TEAM = A4HU2V65N5;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CameraAPI",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/CameraAPI";
 				INFOPLIST_FILE = Sonor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/CameraAPI",
+				);
+				MODULEMAP_PRIVATE_FILE = "$(SRCROOT)/CameraAPI/module.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = com.watfaq.Sonor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)/CameraAPI";
+				SWIFT_OBJC_BRIDGING_HEADER = "Sonor-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

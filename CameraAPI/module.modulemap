@@ -1,0 +1,4 @@
+module CameraAPI {
+    header "CameraAPI.h"
+    export *
+}
