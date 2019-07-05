@@ -6,10 +6,12 @@ import "C"
 import (
 	"bufio"
 	"bytes"
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net"
 	"net/http"
 	"strings"
@@ -27,8 +29,6 @@ const (
 	ST          = "urn:schemas-sony-com:service:ScalarWebAPI:1"
 	USER_AGENT  = "Gomobile"
 )
-
-type CDeviceDescription C.struct_DeviceDescription_t
 
 //export CameraDiscovery
 func CameraDiscovery() (cameraAddr *C.char) {
@@ -85,7 +85,7 @@ func CameraDiscovery() (cameraAddr *C.char) {
 }
 
 //export DeviceDescription
-func DeviceDescription(cameraAddr *C.char) (ptr *CDeviceDescription) {
+func DeviceDescription(cameraAddr *C.char) (ptr *C.struct_DeviceDescription_t) {
 	resp, err := http.Get(C.GoString(cameraAddr))
 	if err != nil {
 		return
@@ -106,23 +106,80 @@ func DeviceDescription(cameraAddr *C.char) (ptr *CDeviceDescription) {
 	var rv TDeviceDescription
 	for _, s := range deviceDescription.Device.XScalarWebAPIDeviceInfo.XScalarWebAPIServiceList.XScalarWebAPIService {
 		if s.XScalarWebAPIServiceType == "guide" {
-			rv.GuideUrl = C.CString(s.XScalarWebAPIActionListURL)
+			rv.GuideUrl = C.CString(s.XScalarWebAPIActionListURL + "/guide")
 		}
 		if s.XScalarWebAPIServiceType == "system" {
-			rv.SystemUrl = C.CString(s.XScalarWebAPIActionListURL)
+			rv.SystemUrl = C.CString(s.XScalarWebAPIActionListURL + "/system")
 		}
 		if s.XScalarWebAPIServiceType == "accessControl" {
-			rv.SystemUrl = C.CString(s.XScalarWebAPIActionListURL)
+			rv.SystemUrl = C.CString(s.XScalarWebAPIActionListURL + "/accessControl")
 		}
 		if s.XScalarWebAPIServiceType == "camera" {
-			rv.CameraUrl = C.CString(s.XScalarWebAPIActionListURL)
+			rv.CameraUrl = C.CString(s.XScalarWebAPIActionListURL + "/camera")
 		}
 	}
 
-	ptr = (*CDeviceDescription)(C.malloc(C.size_t(unsafe.Sizeof(CDeviceDescription{}))))
+	ptr = (*C.struct_DeviceDescription_t)(C.malloc(C.size_t(unsafe.Sizeof(C.struct_DeviceDescription_t{}))))
 	ptr.GuideUrl = rv.GuideUrl
 	ptr.CameraUrl = rv.CameraUrl
 	return ptr
+}
+
+//export GetAvailableApiList
+func GetAvailableApiList(apiAddr *C.char) (rv *C.struct_SliceHeader_t) {
+	bodyJson := RPCRequest{
+		Method:  "getAvailableApiList",
+		Params:  []string{},
+		Id:      1,
+		Version: "1.0",
+	}
+	body, err := json.Marshal(bodyJson)
+	if err != nil {
+		return
+	}
+
+	println("-> ", C.GoString(apiAddr), string(string(body)))
+
+	res, err := http.Post(C.GoString(apiAddr), "application/json", bytes.NewReader(body))
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	defer res.Body.Close()
+
+	bodyBytes, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	println("<- ", string(bodyBytes))
+
+	var rpcRes RPCResponse
+	if err := json.Unmarshal(bodyBytes, &rpcRes); err != nil {
+		log.Println(err)
+		return
+	}
+
+	rv = (*C.struct_SliceHeader_t)(C.malloc(C.size_t(unsafe.Sizeof(C.struct_SliceHeader_t{}))))
+
+	if len(rpcRes.Result) > 0 {
+		if rList, ok := rpcRes.Result[0].([]interface{}); ok {
+			var data []*C.char
+			for _, s := range rList {
+				data = append(data, C.CString(s.(string)))
+			}
+			rv.Data = (**C.char)(&data[0])
+			rv.Len = C.int(len(rList))
+		}
+	}
+
+	if len(rpcRes.Error) == 2 {
+		if errStr, ok := rpcRes.Error[1].(string); ok {
+			println("api error: " + errStr)
+		}
+	}
+	return
 }
 
 func parseServerAddr(responseReader io.Reader, responseAddr *net.UDPAddr) (addr string, err error) {

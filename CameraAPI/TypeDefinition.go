@@ -1,7 +1,6 @@
 package main
 
 import "C"
-
 import "encoding/xml"
 
 type DeviceDescriptionXML struct {
@@ -64,3 +63,21 @@ type TDeviceDescription struct {
 	AccessControlUrl *C.char
 	CameraUrl        *C.char
 }
+
+type RPCRequest struct {
+	Method  string   `json:"method,omitempty"`
+	Params  []string `json:"params"`
+	Id      int      `json:"id,omitempty"`
+	Version string   `json:"version,omitempty"`
+}
+
+type RPCResponse struct {
+	Id     int           `json:"id,omitempty"`
+	Result []interface{} `json:"result,omitempty"`
+	Error  []interface{} `json:"error,omitempty"`
+}
+
+const (
+	CameraFunctionRemoteShooting   = "Remote Shooting"
+	CameraFunctionContentsTransfer = "Contents Transfer"
+)

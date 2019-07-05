@@ -77,6 +77,8 @@ extern char* CameraDiscovery();
 
 extern struct DeviceDescription_t* DeviceDescription(char* p0);
 
+extern struct SliceHeader_t* GetAvailableApiList(char* p0);
+
 #ifdef __cplusplus
 }
 #endif

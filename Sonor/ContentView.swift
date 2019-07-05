@@ -10,11 +10,11 @@ import SwiftUI
 
 struct ContentView : View {
     @State private var selection = 0
-    @State fileprivate var cameraAddress: String = ""
+    @EnvironmentObject var globalStore: GlobalStore
     
     var body: some View {
-        TabbedView(selection: $selection){
-            TestUIControl(cameraAddress: $cameraAddress)
+        TabbedView(){
+            ShootingFeatureList()
                 .font(.title)
                 .tabItemLabel(Image("first"))
                 .tag(0)
