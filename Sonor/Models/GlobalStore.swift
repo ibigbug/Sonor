@@ -15,7 +15,7 @@ class GlobalStore: BindableObject {
             didChange.send(self)
         }
     }
-    var shootingFeatures: [ShootingFeature] = [] {
+    var availableApiList: [String] = [] {
         didSet {
             didChange.send(self)
         }
@@ -49,6 +49,6 @@ extension GlobalStore: CameraAPIDelegate {
     }
     
     func availableApiDidLoad(_ apiList: [String]) {
-        self.shootingFeatures = apiList.enumerated().map{ShootingFeature(id: $0, name: $1)}
+        self.availableApiList = apiList
     }
 }

@@ -13,7 +13,7 @@ struct ShootingFeatureRow : View {
     
     var body: some View {
         HStack {
-            Text(feature.name)
+            Text(feature.name.rawValue)
         }
     }
 }
@@ -21,7 +21,7 @@ struct ShootingFeatureRow : View {
 #if DEBUG
 struct ShootingFeatureRow_Previews : PreviewProvider {
     static var previews: some View {
-        ShootingFeatureRow(feature: ShootingFeature(id: 0, name: "Test Feature"))
+        ShootingFeatureRow(feature: ShootingFeature(id: 0, name: FeatureName.MultipleExposure, description: "This is a good feature that you can do a lot with it"))
             .previewLayout(.fixed(width: 300, height: 70))
     }
 }

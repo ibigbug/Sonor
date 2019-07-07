@@ -1,3 +1,6 @@
+WD=$(PWD)/$(dirname $0)
+pushd $WD
+
 IOS_MIN_VERSION="8.0"
 DEVELOPER_DIR=`xcode-select --print-path`
 IPHONEOS_SDK_VERSION=`xcodebuild -version -sdk | grep -A 1 '^iPhoneOS' | tail -n 1 |  awk '{ print $2 }'`
@@ -15,3 +18,5 @@ export CGO_CFLAGS="-isysroot $IPHONEOS_SDK_PATH -arch arm64 -miphoneos-version-m
 export CGO_LDFLAGS="-isysroot $IPHONEOS_SDK_PATH -arch arm64 -miphoneos-version-min=$IOS_MIN_VERSION"
 
 go build -buildmode=c-archive
+
+popd

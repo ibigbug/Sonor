@@ -1,5 +1,6 @@
 package main
 
+// #include <stdlib.h>
 // #include "types.h"
 import "C"
 
@@ -81,7 +82,11 @@ func CameraDiscovery() (cameraAddr *C.char) {
 	if len(addressList) == 0 {
 		return
 	}
-	return C.CString(addressList[0])
+
+	cameraAddr = C.CString(addressList[0])
+	defer C.free(unsafe.Pointer(cameraAddr))
+
+	return
 }
 
 //export DeviceDescription
@@ -107,22 +112,28 @@ func DeviceDescription(cameraAddr *C.char) (ptr *C.struct_DeviceDescription_t) {
 	for _, s := range deviceDescription.Device.XScalarWebAPIDeviceInfo.XScalarWebAPIServiceList.XScalarWebAPIService {
 		if s.XScalarWebAPIServiceType == "guide" {
 			rv.GuideUrl = C.CString(s.XScalarWebAPIActionListURL + "/guide")
+			defer C.free(unsafe.Pointer(rv.GuideUrl))
 		}
 		if s.XScalarWebAPIServiceType == "system" {
 			rv.SystemUrl = C.CString(s.XScalarWebAPIActionListURL + "/system")
+			defer C.free(unsafe.Pointer(rv.SystemUrl))
 		}
 		if s.XScalarWebAPIServiceType == "accessControl" {
 			rv.SystemUrl = C.CString(s.XScalarWebAPIActionListURL + "/accessControl")
+			defer C.free(unsafe.Pointer(rv.SystemUrl))
 		}
 		if s.XScalarWebAPIServiceType == "camera" {
 			rv.CameraUrl = C.CString(s.XScalarWebAPIActionListURL + "/camera")
+			defer C.free(unsafe.Pointer(rv.CameraUrl))
 		}
 	}
 
 	ptr = (*C.struct_DeviceDescription_t)(C.malloc(C.size_t(unsafe.Sizeof(C.struct_DeviceDescription_t{}))))
 	ptr.GuideUrl = rv.GuideUrl
 	ptr.CameraUrl = rv.CameraUrl
-	return ptr
+	defer C.free(unsafe.Pointer(ptr))
+
+	return
 }
 
 //export GetAvailableApiList
@@ -162,6 +173,7 @@ func GetAvailableApiList(apiAddr *C.char) (rv *C.struct_SliceHeader_t) {
 	}
 
 	rv = (*C.struct_SliceHeader_t)(C.malloc(C.size_t(unsafe.Sizeof(C.struct_SliceHeader_t{}))))
+	defer C.free(unsafe.Pointer(rv))
 
 	if len(rpcRes.Result) > 0 {
 		if rList, ok := rpcRes.Result[0].([]interface{}); ok {

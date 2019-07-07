@@ -13,19 +13,15 @@ struct ShootingFeatureList : View {
 
     var body: some View {
         HStack{
-            if state.cameraFound {
-                NavigationView {
-                    List(self.state.shootingFeatures) { feature in
+            NavigationView {
+                List(SupportedFeatures) { feature in
+                    NavigationButton(destination: ShootingFeatureRoute(feature: feature)) {
                         ShootingFeatureRow(feature: feature)
-                    }.onAppear(perform: loadApi)
-                    .navigationBarTitle(Text("Features List"))
+                    }
                 }
+                .navigationBarTitle(Text("Features List"))
             }
-            
-            else {
-                Text("Finding Camera")
-            }
-        }.onAppear(perform: findCamera)
+        }
     }
     
     private func findCamera() {

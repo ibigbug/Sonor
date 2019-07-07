@@ -13,9 +13,8 @@ struct ContentView : View {
     @EnvironmentObject var globalStore: GlobalStore
     
     var body: some View {
-        TabbedView(){
+        TabbedView() {
             ShootingFeatureList()
-                .font(.title)
                 .tabItemLabel(Image("first"))
                 .tag(0)
             
@@ -23,6 +22,11 @@ struct ContentView : View {
                 .font(.title)
                 .tabItemLabel(Image("second"))
                 .tag(1)
+            
+            ShootingFeatureList()
+                .font(.title)
+                .tabItemLabel(Image("third"))
+                .tag(2)
         }
     }
 }

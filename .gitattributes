@@ -3,3 +3,4 @@
 *.framework/**/*.h -filter=lfs -diff=lfs -merge=lfs -text
 *.framework/**/*.plist -filter=lfs -diff=lfs -merge=lfs -text
 opencv2.framework/Versions/A/opencv2 filter=lfs diff=lfs merge=lfs -text
+CameraAPI/CameraAPI.a filter=lfs diff=lfs merge=lfs -text

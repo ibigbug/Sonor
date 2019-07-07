@@ -20,6 +20,7 @@ typedef struct { const char *p; ptrdiff_t n; } _GoString_;
 
 
 #line 3 "Camera.go"
+ #include <stdlib.h>
  #include "types.h"
 
 #line 1 "cgo-generated-wrapper"
