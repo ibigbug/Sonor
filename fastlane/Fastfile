@@ -17,10 +17,15 @@ default_platform(:ios)
 
 platform :ios do
   lane :beta do
+    match(type: "appstore")
+
     increment_build_number
+
     build_app(
-      xcargs: "-allowProvisioningUpdates",
+        workspace: "Sonor.xcworkspace",
+        include_bitcode: false,
+        include_symbols: false
     )
-    upload_to_testflight
+    crashlytics(api_token: ENV["CRASHLYTICS_API_TOKEN"], build_secret: ENV["CRASHLYTICS_BUILD_SECRET"])
   end
 end
