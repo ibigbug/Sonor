@@ -1,20 +1,33 @@
 PODS:
   - Alamofire (5.0.0-beta.6)
+  - Crashlytics (3.13.1):
+    - Fabric (~> 1.10.1)
+  - Fabric (1.10.1)
+  - OpenCV (3.4.2)
   - SKPhotoBrowser (6.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.5)
+  - Crashlytics
+  - Fabric
+  - OpenCV
   - SKPhotoBrowser
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
+    - Crashlytics
+    - Fabric
+    - OpenCV
     - SKPhotoBrowser
 
 SPEC CHECKSUMS:
   Alamofire: cd08a4402bd12cacd0c66f23fb12fec8d6b965e4
+  Crashlytics: 5aa8e90dcbf2f34898b4f5a0037787531246cca0
+  Fabric: f6f21452846788bb44595d73e9909d79d328e617
+  OpenCV: 452909747854c92e0f59670961ed5131f5286cb5
   SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
 
-PODFILE CHECKSUM: 9fa77e20707c23526c5dc7a06a103b4342ed683b
+PODFILE CHECKSUM: 628ba162bf781203c80d8e1b4838b6a874d2f4c1
 
 COCOAPODS: 1.7.3

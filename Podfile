@@ -8,5 +8,8 @@ target 'Sonor' do
   # Pods for Sonor
   pod 'Alamofire', '~> 5.0.0-beta.5'
   pod 'SKPhotoBrowser'
+  pod 'OpenCV'
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 end
