@@ -43,6 +43,10 @@ extension GlobalStore {
 }
 
 extension GlobalStore: CameraAPIDelegate {
+    func errorDidThrow(_ err: CameraAPIError) {
+        print(err)
+    }
+    
     func cameraDidDiscovery(_ cameraAddress: String) {
         self.cameraFound = true
         CameraDescription.CameraLocation = cameraAddress

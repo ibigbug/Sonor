@@ -22,45 +22,48 @@ struct ShootingFeatureRoute : View {
     @State var smoothMode: SmoothMode = .Water
     @State var smoothLevel: SmoothLevel = .Low
     
+    @EnvironmentObject var state: GlobalStore
+    
     var body: some View {
-        NavigationView {
+        VStack(spacing: 20) {
+            HStack {
+                Spacer()
+                
+                Button(action: shoot) {
+                    Text("Shoot")
+                }
+            }
             
-            VStack(alignment: .leading, spacing: 20){
-                if feature.name == .MultipleExposure {
-                    Text("Multiple Exposure")
-                } else if feature.name == .SmoothReflection {
-                    VStack(alignment:. leading) {
-                        Text("Scenario").bold()
-                        
-                        SegmentedControl(selection: $smoothMode){
-                            ForEach(SmoothMode.allCases.identified(by: \.self)) { mode in
-                                Text(mode.rawValue).tag(mode)
-                            }
+            if state.cameraFound {
+                VStack(alignment:. leading) {
+                    Text("Scenario").bold()
+                    
+                    SegmentedControl(selection: $smoothMode){
+                        ForEach(SmoothMode.allCases.identified(by: \.self)) { mode in
+                            Text(mode.rawValue).tag(mode)
                         }
-                        
-                        Text("Smooth Level").bold()
-                        
-                        SegmentedControl(selection: $smoothLevel){
-                            ForEach(SmoothLevel.allCases.identified(by: \.self)) { level in
-                                Text(level.rawValue).tag(level)
-                            }
-                        }
-                        
-                        Spacer()
-                        
-                        Button(action: shoot) {
-                            Text("Shoot")
+                    }
+                    
+                    Text("Smooth Level").bold()
+                    
+                    SegmentedControl(selection: $smoothLevel){
+                        ForEach(SmoothLevel.allCases.identified(by: \.self)) { level in
+                            Text(level.rawValue).tag(level)
                         }
                     }
                 }
             }
-            .padding()
+            else {
+                Text("Finding camera")
+            }
             
             Spacer()
         }
     }
     
     private func shoot() {
-        
+        CameraWrapper.shared.actTakePicture{ imageUrl in
+            print(imageUrl)
+        }
     }
 }

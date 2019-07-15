@@ -12,24 +12,18 @@ struct ShootingFeatureList : View {
     @EnvironmentObject var state: GlobalStore
 
     var body: some View {
-        HStack{
-            NavigationView {
-                List(SupportedFeatures) { feature in
-                    NavigationButton(destination: ShootingFeatureRoute(feature: feature)) {
-                        ShootingFeatureRow(feature: feature)
-                    }
+        NavigationView {
+            List(SupportedFeatures) { feature in
+                NavigationLink(destination: ShootingFeatureRoute(feature: feature).environmentObject(self.state)) {
+                    ShootingFeatureRow(feature: feature)
                 }
-                .navigationBarTitle(Text("Features List"))
             }
-        }
+            .navigationBarTitle(Text("Features List"))
+        }.onAppear(perform: findCamera)
     }
     
     private func findCamera() {
         state.findCamera()
-    }
-    
-    private func loadApi() {
-        state.loadApi()
     }
 }
 

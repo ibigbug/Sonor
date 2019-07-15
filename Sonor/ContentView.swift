@@ -15,18 +15,18 @@ struct ContentView : View {
     var body: some View {
         TabbedView() {
             ShootingFeatureList()
-                .tabItemLabel(Image("first"))
+                .tabItem {
+                    Image("first")
+                    Text("First")
+                }
                 .tag(0)
             
-            Text(OpenCVWrapper.openCVVersionString())
-                .font(.title)
-                .tabItemLabel(Image("second"))
+            GalleryView()
+                .tabItem {
+                    Image("second")
+                    Text("Second")
+                }
                 .tag(1)
-            
-            ShootingFeatureList()
-                .font(.title)
-                .tabItemLabel(Image("third"))
-                .tag(2)
         }
     }
 }

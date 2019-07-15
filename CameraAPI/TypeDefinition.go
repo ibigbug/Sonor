@@ -76,8 +76,3 @@ type RPCResponse struct {
 	Result []interface{} `json:"result,omitempty"`
 	Error  []interface{} `json:"error,omitempty"`
 }
-
-const (
-	CameraFunctionRemoteShooting   = "Remote Shooting"
-	CameraFunctionContentsTransfer = "Contents Transfer"
-)
