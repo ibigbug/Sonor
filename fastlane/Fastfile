@@ -22,9 +22,7 @@ platform :ios do
     increment_build_number
 
     build_app(
-        workspace: "Sonor.xcworkspace",
-        include_bitcode: false,
-        include_symbols: false
+        workspace: "Sonor.xcworkspace"
     )
     crashlytics(api_token: ENV["CRASHLYTICS_API_TOKEN"], build_secret: ENV["CRASHLYTICS_BUILD_SECRET"])
   end

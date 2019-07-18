@@ -13,6 +13,18 @@ import Alamofire
 enum CameraAPIError: Error {
     case generalError(errorMessage: String)
     case invalidResponse
+    case cameraErrorResponse(code: Int, message: String)
+}
+
+enum CameraEvent: String {
+    case FocusStatus = "focusStatus"
+}
+
+enum FocusStatusParameter: String {
+    case NotFocusing = "Not Focusing"
+    case Focusing = "Focusing"
+    case Focused = "Focused"
+    case Failed = "Failed"
 }
 
 protocol CameraAPIDelegate: AnyObject {
@@ -73,7 +85,67 @@ class CameraWrapper {
         }
     }
     
-    func actTakePicture(completion: @escaping (String) -> Void ) {
+    func getEvent(query: CameraEvent, completion: @escaping (String) -> Void) {
+        guard let cameraAPI = CameraDescription.CameraApiUrl else { return }
+        let payload: [String: Any] = [
+            "method": "getEvent",
+            "params": [true],
+            "id": 1,
+            "version": "1.1"
+        ]
+        
+        AF.request(cameraAPI, method: .post, parameters: payload, encoding: JSONEncoding.default)
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
+                switch response.result {
+                case .failure(let err):
+                    self.delegate?.errorDidThrow(.generalError(errorMessage: err.localizedDescription))
+                    return
+                case .success(let data):
+                    guard let json = data as? [String: Any] else {
+                        self.delegate?.errorDidThrow(.invalidResponse)
+                        return
+                    }
+
+                    if let result = json["result"] as? [Any] {
+                        for event in result {
+                            guard let eventObj = event as? [String: String] else { continue }
+                            guard let eventType = eventObj["type"] else { return }
+                            guard let eventStatus = eventObj[eventType] else { return }
+                            if eventType == CameraEvent.FocusStatus.rawValue {
+                                completion(eventStatus)
+                                return
+                            }
+                        }
+                    }
+                }
+        }
+    }
+    
+    func actHalfPressShutter(completion: @escaping () -> Void) {
+        guard let cameraAPI = CameraDescription.CameraApiUrl else { return }
+        let payload: [String: Any] = [
+            "method": "actHalfPressShutter",
+            "params": [],
+            "id": 1,
+            "version": "1.0"
+        ]
+        
+        AF.request(cameraAPI, method: .post, parameters: payload, encoding: JSONEncoding.default)
+            .validate(statusCode: 200..<300)
+            .responseJSON { response in
+                switch response.result {
+                case .failure(let error):
+                    self.delegate?.errorDidThrow(.generalError(errorMessage: error.localizedDescription))
+                    return
+                    
+                case .success:
+                    completion()
+                }
+        }
+    }
+    
+    func actTakePicture(semaphore: DispatchSemaphore? = nil, completion: @escaping (String) -> Void) {
         guard let cameraAPI = CameraDescription.CameraApiUrl else { return }
         let payload: [String: Any] = [
             "id": 1,
@@ -96,6 +168,19 @@ class CameraWrapper {
                         return
                     }
                     
+                    if let err = json["error"] as? [Any] {
+                        guard let errorCode = err[0] as? Int else {
+                            self.delegate?.errorDidThrow(.invalidResponse)
+                            return
+                        }
+                        guard let errorMessage = err[1] as? String else {
+                            self.delegate?.errorDidThrow(.invalidResponse)
+                            return
+                        }
+                        self.delegate?.errorDidThrow(.cameraErrorResponse(code: errorCode, message: errorMessage))
+                        return
+                    }
+                    
                     guard let result = json["result"] as? [[String]] else {
                         self.delegate?.errorDidThrow(.invalidResponse)
                         return
@@ -111,10 +196,32 @@ class CameraWrapper {
                         
                         DispatchQueue.main.async {
                             completion(localUrl)
+                            semaphore?.signal()
                         }
                     }
                 }
             }
+    }
+    
+    func actTakePicture(count: Int, completion: @escaping ([String]) -> Void) {
+        actHalfPressShutter {
+            DispatchQueue.global().async {
+                var rv = [String]()
+                var semaphore: DispatchSemaphore
+                var taken = 0
+
+                repeat {
+                    semaphore = DispatchSemaphore(value: 0)
+                    self.actTakePicture (semaphore: semaphore) { rv.append($0) }
+                    semaphore.wait()
+                    taken += 1
+                } while taken < count
+                
+                DispatchQueue.main.async {
+                    completion(rv)
+                }
+            }
+        }
     }
 }
 

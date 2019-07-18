@@ -62,8 +62,8 @@ struct ShootingFeatureRoute : View {
     }
     
     private func shoot() {
-        CameraWrapper.shared.actTakePicture{ imageUrl in
-            print(imageUrl)
+        CameraWrapper.shared.actTakePicture(count: 10) { imageUrls in
+            print(imageUrls)
         }
     }
 }
