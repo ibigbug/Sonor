@@ -17,8 +17,8 @@ enum SmoothLevel: String, CaseIterable {
     case High = "High"
 }
 
-struct ShootingFeatureRoute : View {
-    var feature: ShootingFeature
+struct ShootingLongExposure : View {
+
     @State var smoothMode: SmoothMode = .Water
     @State var smoothLevel: SmoothLevel = .Low
     
@@ -58,6 +58,8 @@ struct ShootingFeatureRoute : View {
             }
             
             Spacer()
+        }.onAppear {
+            self.state.findCamera()
         }
     }
     

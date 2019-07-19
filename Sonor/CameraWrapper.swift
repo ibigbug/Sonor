@@ -16,7 +16,16 @@ enum CameraAPIError: Error {
     case cameraErrorResponse(code: Int, message: String)
 }
 
+enum AvailableCameraAPI: String {
+    case getEvent = "getEvent"
+    case actHalfPressShutter = "actHalfPressShutter"
+    case cancelHalfPressShutter = "cancelHalfPressShutter"
+    case actTakePicture = "actTakePicture"
+    case awaitTakePicture = "awaitTakePicture"
+}
+
 enum CameraEvent: String {
+    case CameraStatus = "cameraStatus"
     case FocusStatus = "focusStatus"
 }
 
@@ -25,6 +34,10 @@ enum FocusStatusParameter: String {
     case Focusing = "Focusing"
     case Focused = "Focused"
     case Failed = "Failed"
+}
+
+enum CameraStatusParameter: String {
+    case IDLE = "IDLE"
 }
 
 protocol CameraAPIDelegate: AnyObject {
@@ -37,6 +50,9 @@ extension CameraAPIDelegate {
     func pictureDidTake(_ pictureUrl: String) {}
     func pictureDidSave(_ pictureLocalPath: String) {}
 }
+
+let ms = 1000
+let second = 1000 * ms
 
 class CameraWrapper {
     
@@ -85,141 +101,219 @@ class CameraWrapper {
         }
     }
     
-    func getEvent(query: CameraEvent, completion: @escaping (String) -> Void) {
+    func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = [], completion: @escaping (DataResponse<Any>) -> Void) {
         guard let cameraAPI = CameraDescription.CameraApiUrl else { return }
         let payload: [String: Any] = [
-            "method": "getEvent",
-            "params": [true],
+            "method": apiName.rawValue,
+            "params": params,
             "id": 1,
-            "version": "1.1"
+            "version": version
         ]
         
         AF.request(cameraAPI, method: .post, parameters: payload, encoding: JSONEncoding.default)
             .validate(statusCode: 200..<300)
-            .responseJSON { response in
-                switch response.result {
-                case .failure(let err):
-                    self.delegate?.errorDidThrow(.generalError(errorMessage: err.localizedDescription))
-                    return
-                case .success(let data):
-                    guard let json = data as? [String: Any] else {
-                        self.delegate?.errorDidThrow(.invalidResponse)
-                        return
-                    }
+            .responseJSON { completion($0) }
+    }
+    
+    func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = []) -> DataResponse<Any>? {
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        var rv: DataResponse<Any>? = nil
+        sendRequest(apiName, version: version, params: params) {
+            rv = $0
+            semaphore.signal()
+        }
+        semaphore.wait()
+        return rv
+    }
+    
+    func getEvent(query: CameraEvent) -> String? {
+        
+        guard let response = sendRequest(.getEvent, version: "1.2", params: [false]) else { return nil }
 
-                    if let result = json["result"] as? [Any] {
-                        for event in result {
-                            guard let eventObj = event as? [String: String] else { continue }
-                            guard let eventType = eventObj["type"] else { return }
-                            guard let eventStatus = eventObj[eventType] else { return }
-                            if eventType == CameraEvent.FocusStatus.rawValue {
-                                completion(eventStatus)
-                                return
-                            }
-                        }
+        switch response.result {
+        case .failure:
+            return nil
+        case .success(let data):
+            guard let json = data as? [String: Any] else {
+                return nil
+            }
+            
+            if let result = json["result"] as? [Any] {
+                switch query {
+                case .CameraStatus:
+                    if let obj = result[1] as? [String:String] {
+                        return obj[query.rawValue]
                     }
-                }
-        }
-    }
-    
-    func actHalfPressShutter(completion: @escaping () -> Void) {
-        guard let cameraAPI = CameraDescription.CameraApiUrl else { return }
-        let payload: [String: Any] = [
-            "method": "actHalfPressShutter",
-            "params": [],
-            "id": 1,
-            "version": "1.0"
-        ]
-        
-        AF.request(cameraAPI, method: .post, parameters: payload, encoding: JSONEncoding.default)
-            .validate(statusCode: 200..<300)
-            .responseJSON { response in
-                switch response.result {
-                case .failure(let error):
-                    self.delegate?.errorDidThrow(.generalError(errorMessage: error.localizedDescription))
-                    return
-                    
-                case .success:
-                    completion()
-                }
-        }
-    }
-    
-    func actTakePicture(semaphore: DispatchSemaphore? = nil, completion: @escaping (String) -> Void) {
-        guard let cameraAPI = CameraDescription.CameraApiUrl else { return }
-        let payload: [String: Any] = [
-            "id": 1,
-            "version": "1.0",
-            "params": [],
-            "method": "actTakePicture"
-        ]
-        
-        AF.request(cameraAPI, method: HTTPMethod.post, parameters: payload, encoding: JSONEncoding.default)
-            .validate(statusCode: 200..<300)
-            .responseJSON { response in
-                switch response.result {
-                case .failure(let error):
-                    self.delegate?.errorDidThrow(.generalError(errorMessage: error.localizedDescription))
-                    return
-                    
-                case .success(let data):
-                    guard let json = data as? [String: Any] else {
-                        self.delegate?.errorDidThrow(.invalidResponse)
-                        return
-                    }
-                    
-                    if let err = json["error"] as? [Any] {
-                        guard let errorCode = err[0] as? Int else {
-                            self.delegate?.errorDidThrow(.invalidResponse)
-                            return
-                        }
-                        guard let errorMessage = err[1] as? String else {
-                            self.delegate?.errorDidThrow(.invalidResponse)
-                            return
-                        }
-                        self.delegate?.errorDidThrow(.cameraErrorResponse(code: errorCode, message: errorMessage))
-                        return
-                    }
-                    
-                    guard let result = json["result"] as? [[String]] else {
-                        self.delegate?.errorDidThrow(.invalidResponse)
-                        return
-                    }
-                    
-                    self.delegate?.pictureDidTake(result[0][0])
-                    
-                    guard let url = URL(string: result[0][0]) else { return }
-                    DispatchQueue.global().async {
-                        guard let data = try? Data(contentsOf: url) else { return }
-                        guard let image = UIImage(data: data) else { return }
-                        let localUrl = saveImage(image)
-                        
-                        DispatchQueue.main.async {
-                            completion(localUrl)
-                            semaphore?.signal()
-                        }
+                case .FocusStatus:
+                    if let obj = result[35] as? [String: String] {
+                        return obj[query.rawValue]
                     }
                 }
             }
+        }
+        return nil
     }
     
-    func actTakePicture(count: Int, completion: @escaping ([String]) -> Void) {
-        actHalfPressShutter {
-            DispatchQueue.global().async {
-                var rv = [String]()
-                var semaphore: DispatchSemaphore
-                var taken = 0
+    func actHalfPressShutter() -> Bool {
+        guard let response = sendRequest(.actHalfPressShutter) else { return false }
+        switch response.result {
+        case .failure:
+            return false
+        case.success(let data):
+            guard let json = data as? [String: Any] else {
+                return false
+            }
+            
+            if let _ = json["error"] as? [Any] {
+                return false
+            }
+            return true
+        }
+    }
+    
+    func cancelHalfPressShutter() -> Bool {
+        guard let response = sendRequest(.cancelHalfPressShutter) else { return false }
+        switch response.result {
+        case .failure:
+            return false
+        case .success:
+            return true
+        }
+    }
+    
+    func actTakePicture(completion: @escaping (String) -> Void) {
 
-                repeat {
-                    semaphore = DispatchSemaphore(value: 0)
-                    self.actTakePicture (semaphore: semaphore) { rv.append($0) }
-                    semaphore.wait()
-                    taken += 1
-                } while taken < count
+        guard let response = sendRequest(.actTakePicture) else { return }
+        
+        switch response.result {
+        case .failure(let error):
+            self.delegate?.errorDidThrow(.generalError(errorMessage: error.localizedDescription))
+            return
+        case .success(let data):
+            guard let json = data as? [String: Any] else {
+                self.delegate?.errorDidThrow(.invalidResponse)
+                return
+            }
+            
+            if let err = json["error"] as? [Any] {
+                guard let errorCode = err[0] as? Int else {
+                    self.delegate?.errorDidThrow(.invalidResponse)
+                    return
+                }
+                guard let errorMessage = err[1] as? String else {
+                    self.delegate?.errorDidThrow(.invalidResponse)
+                    return
+                }
+                self.delegate?.errorDidThrow(.cameraErrorResponse(code: errorCode, message: errorMessage))
+                return
+            }
+            
+            guard let result = json["result"] as? [[String]] else {
+                self.delegate?.errorDidThrow(.invalidResponse)
+                return
+            }
+            
+            self.delegate?.pictureDidTake(result[0][0])
+            
+            guard let url = URL(string: result[0][0]) else { return }
+            DispatchQueue.global().async {
+                guard let data = try? Data(contentsOf: url) else { return }
+                guard let image = UIImage(data: data) else { return }
+                let localUrl = saveImage(image)
                 
                 DispatchQueue.main.async {
-                    completion(rv)
+                    completion(localUrl)
                 }
+            }
+        }
+    }
+    
+    func actTakePicture() -> String {
+        var rv = ""
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        actTakePicture {
+            rv = $0
+            semaphore.signal()
+        }
+        
+        semaphore.wait()
+        return rv
+    }
+        
+    func actTakePicture(count: Int, completion: @escaping ([String]) -> Void) {
+        DispatchQueue.global().async {
+                    
+            var cameraStatus = ""
+            repeat {
+                guard let status = self.getEvent(query: .CameraStatus) else {
+                    usleep(useconds_t(5 * second))
+                    continue
+                }
+                cameraStatus = status
+            } while cameraStatus != CameraStatusParameter.IDLE.rawValue
+            
+            var focusStatus = ""
+            repeat {
+                _ = self.actHalfPressShutter()
+                guard let status = self.getEvent(query: .FocusStatus) else {
+                    usleep(useconds_t(5 * second))
+                    continue
+                }
+                focusStatus = status
+                usleep(useconds_t(1 * second))
+            } while focusStatus != FocusStatusParameter.Focused.rawValue
+
+            var rv = [String]()
+            var taken = 0
+
+            repeat {
+                var localImage = self.actTakePicture()
+                let awaitLocalImage = self.awaitTakePicture()
+                _ = self.cancelHalfPressShutter()
+                
+                localImage = awaitLocalImage?[0] ?? localImage
+                rv.append(localImage)
+                taken += 1
+                usleep(useconds_t(1 * second))
+            } while taken < count
+        
+            DispatchQueue.main.async {
+                completion(rv)
+            }
+        }
+    }
+    
+    func awaitTakePicture() -> [String]? {
+        let status = getEvent(query: .CameraStatus)
+        if status == CameraStatusParameter.IDLE.rawValue {
+            // Got nothing to do here
+            return nil
+        }
+        
+        while true {
+            guard let response = sendRequest(.awaitTakePicture) else {
+                return nil
+            }
+            
+            switch response.result {
+            case .failure:
+                return nil
+            case .success(let data):
+                guard let json = data as? [String: Any] else {
+                    return nil
+                }
+
+                if let result = json["result"] as? [String] {
+                    return result
+                } else if let error = json["error"] as? [Any] {
+                    guard let code = error[0] as? Int else { return nil }
+                    if code == 40403 {
+                        continue
+                    }
+                }
+                return nil
             }
         }
     }

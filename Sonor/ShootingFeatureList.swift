@@ -9,21 +9,8 @@
 import SwiftUI
 
 struct ShootingFeatureList : View {
-    @EnvironmentObject var state: GlobalStore
-
     var body: some View {
-        NavigationView {
-            List(SupportedFeatures) { feature in
-                NavigationLink(destination: ShootingFeatureRoute(feature: feature).environmentObject(self.state)) {
-                    ShootingFeatureRow(feature: feature)
-                }
-            }
-            .navigationBarTitle(Text("Features List"))
-        }.onAppear(perform: findCamera)
-    }
-    
-    private func findCamera() {
-        state.findCamera()
+        Text("Place holder")
     }
 }
 

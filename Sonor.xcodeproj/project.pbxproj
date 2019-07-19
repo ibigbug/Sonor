@@ -17,7 +17,7 @@
 		4278B57122D4A9C3001F5498 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57022D4A9C3001F5498 /* GalleryView.swift */; };
 		4278B57322D4AA16001F5498 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57222D4AA16001F5498 /* GalleryViewController.swift */; };
 		4278B57722D5EFE2001F5498 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57622D5EFE2001F5498 /* ImageCell.swift */; };
-		42934F0E22CF5FD300538CA1 /* ShootingFeatureRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42934F0D22CF5FD300538CA1 /* ShootingFeatureRoute.swift */; };
+		42934F0E22CF5FD300538CA1 /* ShootingLongExposure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42934F0D22CF5FD300538CA1 /* ShootingLongExposure.swift */; };
 		42A9CFF422CDE1C300A22C25 /* CVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42A9CFF322CDE1C300A22C25 /* CVWrapper.mm */; };
 		42A9CFFB22CDEB1A00A22C25 /* CameraAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9CFFA22CDEB1A00A22C25 /* CameraAPI.a */; };
 		42DA752922CB75C4002F1492 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DA752822CB75C4002F1492 /* AppDelegate.swift */; };
@@ -40,7 +40,7 @@
 		4278B57022D4A9C3001F5498 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		4278B57222D4AA16001F5498 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		4278B57622D5EFE2001F5498 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
-		42934F0D22CF5FD300538CA1 /* ShootingFeatureRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingFeatureRoute.swift; sourceTree = "<group>"; };
+		42934F0D22CF5FD300538CA1 /* ShootingLongExposure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingLongExposure.swift; sourceTree = "<group>"; };
 		42A9CFEF22CDE17A00A22C25 /* Sonor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sonor-Bridging-Header.h"; sourceTree = "<group>"; };
 		42A9CFF322CDE1C300A22C25 /* CVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CVWrapper.mm; sourceTree = "<group>"; };
 		42A9CFF622CDE30C00A22C25 /* CVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVWrapper.h; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 			children = (
 				421EBEEB22CF108A00CD97E4 /* ShootingFeatureRow.swift */,
 				421EBEEF22CF125400CD97E4 /* ShootingFeatureList.swift */,
-				42934F0D22CF5FD300538CA1 /* ShootingFeatureRoute.swift */,
+				42934F0D22CF5FD300538CA1 /* ShootingLongExposure.swift */,
 				4278B57022D4A9C3001F5498 /* GalleryView.swift */,
 				4278B57222D4AA16001F5498 /* GalleryViewController.swift */,
 				4278B57622D5EFE2001F5498 /* ImageCell.swift */,
@@ -316,7 +316,7 @@
 				42DA752B22CB75C4002F1492 /* SceneDelegate.swift in Sources */,
 				4278B57722D5EFE2001F5498 /* ImageCell.swift in Sources */,
 				4278B57322D4AA16001F5498 /* GalleryViewController.swift in Sources */,
-				42934F0E22CF5FD300538CA1 /* ShootingFeatureRoute.swift in Sources */,
+				42934F0E22CF5FD300538CA1 /* ShootingLongExposure.swift in Sources */,
 				421EBEF222CF14DA00CD97E4 /* GlobalStore.swift in Sources */,
 				4278B57122D4A9C3001F5498 /* GalleryView.swift in Sources */,
 				421EBEF422CF151000CD97E4 /* ShootingFeature.swift in Sources */,

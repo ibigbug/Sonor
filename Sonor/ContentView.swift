@@ -14,7 +14,7 @@ struct ContentView : View {
     
     var body: some View {
         TabbedView() {
-            ShootingFeatureList()
+            ShootingLongExposure()
                 .tabItem {
                     Image("first")
                     Text("First")
