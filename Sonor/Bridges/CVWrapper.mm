@@ -9,6 +9,7 @@
 #import <opencv2/opencv.hpp>
 #import "CVWrapper.h"
 
+using namespace std;
 using namespace cv;
 
 @implementation OpenCVWrapper
@@ -17,23 +18,51 @@ using namespace cv;
     return [NSString stringWithFormat:@"OpenCV Version %s", CV_VERSION];
 }
 
-+ (UIImage *)mergeUIImages: (NSArray<UIImage *> *)images
++ (UIImage *)mergeLongExposure: (NSArray<UIImage *> *)images
 {
     NSInteger count = [images count];
     if (count <= 0) return NULL;
     
-    double alpha = 1.0/count;
-    
     Mat baseMat = [OpenCVWrapper cvMatFromUIImage: images[0]];
+    Mat baseMatFloat;
+    baseMat.convertTo(baseMatFloat, CV_32F);
+    baseMat.release();
+
+    vector<Mat> bgrChannel;
+    split(baseMatFloat, bgrChannel);
+    baseMatFloat.release();
+    
+    Mat bAvg = bgrChannel[0], gAvg = bgrChannel[1], rAvg = bgrChannel[2];
     
     for (int i = 1; i < count; i ++) {
         Mat image = [OpenCVWrapper cvMatFromUIImage:images[i]];
-        Mat exposed = baseMat.clone();
-        addWeighted(exposed, alpha, image, 1.0 - alpha, 0.0, baseMat);
+        Mat imageFloat;
+        image.convertTo(imageFloat, CV_32F);
+        image.release();
+        
+        vector<Mat> imageChannel;
+        split(imageFloat, imageChannel);
+        imageFloat.release();
+        
+        Mat rCh = imageChannel[2], gCh = imageChannel[1], bCh = imageChannel[0];
+        rAvg = ((i * rAvg) + (1 * rCh)) / (i + 1.0);
+        gAvg = ((i * gAvg) + (1 * gCh)) / (i + 1.0);
+        bAvg = ((i * bAvg) + (1 * bCh)) / (i + 1.0);
     }
     
-    cvtColor(baseMat, baseMat, CV_RGBA2RGB, 30);
-    UIImage* result = [OpenCVWrapper UIImageFromCVMat:baseMat];
+    Mat finalMatFloat;
+    vector<Mat> channels;
+    channels.push_back(bAvg);
+    channels.push_back(gAvg);
+    channels.push_back(rAvg);
+    merge(channels, finalMatFloat);
+    
+    Mat finalMat;
+    finalMatFloat.convertTo(finalMat, CV_8U);
+    finalMatFloat.release();
+
+    UIImage* result = [OpenCVWrapper UIImageFromCVMat:finalMat];
+    finalMat.release();
     return result;
 }
 

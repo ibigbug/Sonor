@@ -51,6 +51,8 @@ struct ShootingLongExposure : View {
                             Text(level.rawValue).tag(level)
                         }
                     }
+                    
+                    Text("CV Version: \(OpenCVWrapper.openCVVersionString())")
                 }
             }
             else {
@@ -64,8 +66,10 @@ struct ShootingLongExposure : View {
     }
     
     private func shoot() {
-        CameraWrapper.shared.actTakePicture(count: 10) { imageUrls in
-            print(imageUrls)
+        CameraWrapper.shared.actTakePicture(count: 3) { imageUrls in
+            let images = imageUrls.map{ UIImage(contentsOfFile: $0) }.compactMap{$0}
+            let result = OpenCVWrapper.mergeLongExposure(images)
+            saveImage(result)
         }
     }
 }

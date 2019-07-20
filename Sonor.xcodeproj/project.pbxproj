@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		142994A0C3C23817D146D161 /* libPods-SonorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAACE5512369E8A0734D1E0 /* libPods-SonorTests.a */; };
 		3AC382B181B832AA99281399 /* Pods_Sonor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389058836357A536F595BEE9 /* Pods_Sonor.framework */; };
 		421EBEE922CF07AE00CD97E4 /* CameraDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421EBEE822CF07AE00CD97E4 /* CameraDescription.swift */; };
 		421EBEEC22CF108A00CD97E4 /* ShootingFeatureRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421EBEEB22CF108A00CD97E4 /* ShootingFeatureRow.swift */; };
@@ -17,6 +18,11 @@
 		4278B57122D4A9C3001F5498 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57022D4A9C3001F5498 /* GalleryView.swift */; };
 		4278B57322D4AA16001F5498 /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57222D4AA16001F5498 /* GalleryViewController.swift */; };
 		4278B57722D5EFE2001F5498 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57622D5EFE2001F5498 /* ImageCell.swift */; };
+		428E95A222E38C2100038F28 /* SonorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428E95A122E38C2100038F28 /* SonorTests.swift */; };
+		428E95BC22E3980C00038F28 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 428E95BB22E3980C00038F28 /* Test.m */; };
+		428E95C022E39AEA00038F28 /* 3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 428E95BD22E39AEA00038F28 /* 3.jpeg */; };
+		428E95C122E39AEA00038F28 /* 1.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 428E95BE22E39AEA00038F28 /* 1.jpeg */; };
+		428E95C222E39AEA00038F28 /* 2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 428E95BF22E39AEA00038F28 /* 2.jpeg */; };
 		42934F0E22CF5FD300538CA1 /* ShootingLongExposure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42934F0D22CF5FD300538CA1 /* ShootingLongExposure.swift */; };
 		42A9CFF422CDE1C300A22C25 /* CVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 42A9CFF322CDE1C300A22C25 /* CVWrapper.mm */; };
 		42A9CFFB22CDEB1A00A22C25 /* CameraAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A9CFFA22CDEB1A00A22C25 /* CameraAPI.a */; };
@@ -28,7 +34,18 @@
 		42DA753522CB75C7002F1492 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42DA753322CB75C7002F1492 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		428E95A422E38C2100038F28 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 42DA751D22CB75C4002F1492 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 42DA752422CB75C4002F1492;
+			remoteInfo = Sonor;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		0F9C5CFEA7519E143830244D /* Pods-SonorTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SonorTests.release.xcconfig"; path = "Target Support Files/Pods-SonorTests/Pods-SonorTests.release.xcconfig"; sourceTree = "<group>"; };
 		353D2BCB98B608029DE85191 /* Pods-Sonor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sonor.release.xcconfig"; path = "Target Support Files/Pods-Sonor/Pods-Sonor.release.xcconfig"; sourceTree = "<group>"; };
 		389058836357A536F595BEE9 /* Pods_Sonor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sonor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		421EBEE822CF07AE00CD97E4 /* CameraDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDescription.swift; sourceTree = "<group>"; };
@@ -40,10 +57,18 @@
 		4278B57022D4A9C3001F5498 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		4278B57222D4AA16001F5498 /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		4278B57622D5EFE2001F5498 /* ImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		428E959F22E38C2100038F28 /* SonorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		428E95A122E38C2100038F28 /* SonorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonorTests.swift; sourceTree = "<group>"; };
+		428E95A322E38C2100038F28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		428E95BA22E3980B00038F28 /* SonorTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SonorTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		428E95BB22E3980C00038F28 /* Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Test.m; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/SonorTests/Test.m; sourceTree = "<group>"; };
+		428E95BD22E39AEA00038F28 /* 3.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 3.jpeg; sourceTree = "<group>"; };
+		428E95BE22E39AEA00038F28 /* 1.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpeg; sourceTree = "<group>"; };
+		428E95BF22E39AEA00038F28 /* 2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 2.jpeg; sourceTree = "<group>"; };
 		42934F0D22CF5FD300538CA1 /* ShootingLongExposure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingLongExposure.swift; sourceTree = "<group>"; };
 		42A9CFEF22CDE17A00A22C25 /* Sonor-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Sonor-Bridging-Header.h"; sourceTree = "<group>"; };
 		42A9CFF322CDE1C300A22C25 /* CVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CVWrapper.mm; sourceTree = "<group>"; };
-		42A9CFF622CDE30C00A22C25 /* CVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVWrapper.h; sourceTree = "<group>"; };
+		42A9CFF622CDE30C00A22C25 /* CVWrapper.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; path = CVWrapper.h; sourceTree = "<group>"; };
 		42A9CFF722CDE34400A22C25 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		42A9CFFA22CDEB1A00A22C25 /* CameraAPI.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = CameraAPI.a; path = CameraAPI/CameraAPI.a; sourceTree = "<group>"; };
 		42DA752522CB75C4002F1492 /* Sonor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sonor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,10 +79,20 @@
 		42DA753122CB75C7002F1492 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		42DA753422CB75C7002F1492 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		42DA753622CB75C7002F1492 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5608712C764865CAA33A8E76 /* Pods-SonorTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SonorTests.debug.xcconfig"; path = "Target Support Files/Pods-SonorTests/Pods-SonorTests.debug.xcconfig"; sourceTree = "<group>"; };
+		ADAACE5512369E8A0734D1E0 /* libPods-SonorTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SonorTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04D9AF28054682122B63CA7 /* Pods-Sonor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sonor.debug.xcconfig"; path = "Target Support Files/Pods-Sonor/Pods-Sonor.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		428E959C22E38C2100038F28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				142994A0C3C23817D146D161 /* libPods-SonorTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42DA752222CB75C4002F1492 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -108,6 +143,7 @@
 				42A9CFEF22CDE17A00A22C25 /* Sonor-Bridging-Header.h */,
 				42A9CFFA22CDEB1A00A22C25 /* CameraAPI.a */,
 				389058836357A536F595BEE9 /* Pods_Sonor.framework */,
+				ADAACE5512369E8A0734D1E0 /* libPods-SonorTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -121,10 +157,33 @@
 			name = CameraAPI;
 			sourceTree = "<group>";
 		};
+		428E95A022E38C2100038F28 /* SonorTests */ = {
+			isa = PBXGroup;
+			children = (
+				428E95A922E38C5D00038F28 /* Data */,
+				428E95A122E38C2100038F28 /* SonorTests.swift */,
+				428E95A322E38C2100038F28 /* Info.plist */,
+				428E95BB22E3980C00038F28 /* Test.m */,
+				428E95BA22E3980B00038F28 /* SonorTests-Bridging-Header.h */,
+			);
+			path = SonorTests;
+			sourceTree = "<group>";
+		};
+		428E95A922E38C5D00038F28 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				428E95BE22E39AEA00038F28 /* 1.jpeg */,
+				428E95BF22E39AEA00038F28 /* 2.jpeg */,
+				428E95BD22E39AEA00038F28 /* 3.jpeg */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		42DA751C22CB75C4002F1492 = {
 			isa = PBXGroup;
 			children = (
 				42DA752722CB75C4002F1492 /* Sonor */,
+				428E95A022E38C2100038F28 /* SonorTests */,
 				42DA752622CB75C4002F1492 /* Products */,
 				424E7BC222CBA09900B627BC /* Frameworks */,
 				AA0AA20F2203B4334480F140 /* Pods */,
@@ -135,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				42DA752522CB75C4002F1492 /* Sonor.app */,
+				428E959F22E38C2100038F28 /* SonorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,6 +230,8 @@
 			children = (
 				F04D9AF28054682122B63CA7 /* Pods-Sonor.debug.xcconfig */,
 				353D2BCB98B608029DE85191 /* Pods-Sonor.release.xcconfig */,
+				5608712C764865CAA33A8E76 /* Pods-SonorTests.debug.xcconfig */,
+				0F9C5CFEA7519E143830244D /* Pods-SonorTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -177,6 +239,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		428E959E22E38C2100038F28 /* SonorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 428E95A622E38C2100038F28 /* Build configuration list for PBXNativeTarget "SonorTests" */;
+			buildPhases = (
+				6342D416B03624EC31153364 /* [CP] Check Pods Manifest.lock */,
+				428E959B22E38C2100038F28 /* Sources */,
+				428E959C22E38C2100038F28 /* Frameworks */,
+				428E959D22E38C2100038F28 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				428E95A522E38C2100038F28 /* PBXTargetDependency */,
+			);
+			name = SonorTests;
+			productName = SonorTests;
+			productReference = 428E959F22E38C2100038F28 /* SonorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		42DA752422CB75C4002F1492 /* Sonor */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 42DA753922CB75C7002F1492 /* Build configuration list for PBXNativeTarget "Sonor" */;
@@ -207,6 +288,11 @@
 				LastUpgradeCheck = 1100;
 				ORGANIZATIONNAME = Watfaq;
 				TargetAttributes = {
+					428E959E22E38C2100038F28 = {
+						CreatedOnToolsVersion = 11.0;
+						LastSwiftMigration = 1100;
+						TestTargetID = 42DA752422CB75C4002F1492;
+					};
 					42DA752422CB75C4002F1492 = {
 						CreatedOnToolsVersion = 11.0;
 						LastSwiftMigration = 1100;
@@ -227,11 +313,22 @@
 			projectRoot = "";
 			targets = (
 				42DA752422CB75C4002F1492 /* Sonor */,
+				428E959E22E38C2100038F28 /* SonorTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		428E959D22E38C2100038F28 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				428E95C022E39AEA00038F28 /* 3.jpeg in Resources */,
+				428E95C122E39AEA00038F28 /* 1.jpeg in Resources */,
+				428E95C222E39AEA00038F28 /* 2.jpeg in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42DA752322CB75C4002F1492 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -262,6 +359,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${PODS_ROOT}/Fabric/run b0e843a5497b2f15bc7972f8284edd103afe4961 2d2f8ea6610ac7b0f1e4546e51e66736a85d0e21adadd8fd58b9d2ee845258ec./Fabric.framework/run b0e843a5497b2f15bc7972f8284edd103afe4961 2d2f8ea6610ac7b0f1e4546e51e66736a85d0e21adadd8fd58b9d2ee845258ec\n";
+		};
+		6342D416B03624EC31153364 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SonorTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		A18D4C8CE74ED4A4250C44D2 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -305,6 +424,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		428E959B22E38C2100038F28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				428E95A222E38C2100038F28 /* SonorTests.swift in Sources */,
+				428E95BC22E3980C00038F28 /* Test.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		42DA752122CB75C4002F1492 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -328,6 +456,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		428E95A522E38C2100038F28 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 42DA752422CB75C4002F1492 /* Sonor */;
+			targetProxy = 428E95A422E38C2100038F28 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		42DA753322CB75C7002F1492 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -340,6 +476,53 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		428E95A722E38C2100038F28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5608712C764865CAA33A8E76 /* Pods-SonorTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A4HU2V65N5;
+				INFOPLIST_FILE = SonorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.watfaq.SonorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SonorTests/SonorTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sonor.app/Sonor";
+			};
+			name = Debug;
+		};
+		428E95A822E38C2100038F28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F9C5CFEA7519E143830244D /* Pods-SonorTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A4HU2V65N5;
+				INFOPLIST_FILE = SonorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.watfaq.SonorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SonorTests/SonorTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sonor.app/Sonor";
+			};
+			name = Release;
+		};
 		42DA753722CB75C7002F1492 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -540,6 +723,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		428E95A622E38C2100038F28 /* Build configuration list for PBXNativeTarget "SonorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				428E95A722E38C2100038F28 /* Debug */,
+				428E95A822E38C2100038F28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		42DA752022CB75C4002F1492 /* Build configuration list for PBXProject "Sonor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

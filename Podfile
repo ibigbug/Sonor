@@ -13,3 +13,7 @@ target 'Sonor' do
   pod 'Crashlytics'
 
 end
+
+target 'SonorTests' do
+  inherit! :search_paths
+end

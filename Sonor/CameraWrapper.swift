@@ -22,6 +22,7 @@ enum AvailableCameraAPI: String {
     case cancelHalfPressShutter = "cancelHalfPressShutter"
     case actTakePicture = "actTakePicture"
     case awaitTakePicture = "awaitTakePicture"
+    case getFocusMode = "getFocusMode"
 }
 
 enum CameraEvent: String {
@@ -38,6 +39,13 @@ enum FocusStatusParameter: String {
 
 enum CameraStatusParameter: String {
     case IDLE = "IDLE"
+}
+
+enum FocusModeParameter: String {
+    case AFS = "AF-S"
+    case AFC = "AF-C"
+    case DMF = "DMF"
+    case MF = "MF"
 }
 
 protocol CameraAPIDelegate: AnyObject {
@@ -60,6 +68,8 @@ class CameraWrapper {
     
     weak var delegate: CameraAPIDelegate?
     
+    private var focusMode: FocusModeParameter = .MF
+    
     private init() {}
     
     public func startDiscovery() {
@@ -67,6 +77,10 @@ class CameraWrapper {
         guard let s = String(bytesNoCopy: p, length: strlen(p), encoding: .utf8, freeWhenDone: true) else { return }
         CameraDescription.CameraLocation = s
         deviceDescription(s)
+        
+        // get camera info
+        focusMode = getFocusMode()
+        
         DispatchQueue.main.async {
             self.delegate?.cameraDidDiscovery(s)
         }
@@ -182,6 +196,26 @@ class CameraWrapper {
         }
     }
     
+    func getFocusMode() -> FocusModeParameter {
+        guard let response = sendRequest(.getFocusMode) else {
+            return .MF
+        }
+        switch response.result {
+        case .failure:
+            return .MF
+        case .success(let data):
+            guard let json = data as? [String: Any] else {
+                return .MF
+            }
+            
+            if let result = json["result"] as? [String] {
+                return FocusModeParameter.init(rawValue: result[0])!
+            }
+        }
+        
+        return .MF
+    }
+    
     func actTakePicture(completion: @escaping (String?) -> Void) {
 
         guard let response = sendRequest(.actTakePicture) else { return }
@@ -247,7 +281,9 @@ class CameraWrapper {
         
     func actTakePicture(count: Int, completion: @escaping ([String]) -> Void) {
         DispatchQueue.global().async {
-            _ = self.actHalfPressShutter()
+            if self.focusMode == .AFC || self.focusMode == .AFS {
+                _ = self.actHalfPressShutter()
+            }
             
             var rv = [String]()
             var taken = 0
