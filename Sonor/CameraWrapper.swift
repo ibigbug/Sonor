@@ -370,7 +370,7 @@ func saveImage(_ image: UIImage) -> String {
     return localImagePath
 }
 
-func getGalleryRootDirectory() -> String {
+func getGalleryRootDirectory() -> NSString {
     let dir = (getDirectoryPath() as NSString).appendingPathComponent("DCIM")
     if !directoryExists(dir) {
         do {
@@ -379,5 +379,5 @@ func getGalleryRootDirectory() -> String {
             print("failed to create gallery folder")
         }
     }
-    return dir
+    return dir as NSString
 }

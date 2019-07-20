@@ -9,9 +9,18 @@
 import SwiftUI
 
 struct GalleryView: View {
-    
+    @EnvironmentObject var gallery: GalleryStore
     var body: some View {
-        GalleryViewController()
+        NavigationView {
+            List(gallery.photos) { imageModel in
+                NavigationLink(destination: ImageView().environmentObject(self.gallery)) {
+                    ImageRowView(image:imageModel.image)
+                }
+            }
+        }.navigationBarTitle("Gallery")
+        .onAppear(perform: {
+            self.gallery.loadGallery()
+        })
     }
 }
 

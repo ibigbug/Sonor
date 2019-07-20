@@ -21,7 +21,7 @@ struct ContentView : View {
                 }
                 .tag(0)
             
-            GalleryView()
+            GalleryView().environmentObject(GalleryStore())
                 .tabItem {
                     Image("second")
                     Text("Second")
