@@ -14,9 +14,9 @@ export CXX=`xcrun -find clang++`
 export CGO_ENABLED=1
 export GOOS=darwin
 export GOARCH=arm64
-export CGO_CFLAGS="-isysroot $IPHONEOS_SDK_PATH -arch arm64 -miphoneos-version-min=$IOS_MIN_VERSION"
+export CGO_CFLAGS="-isysroot $IPHONEOS_SDK_PATH -arch arm64 -miphoneos-version-min=$IOS_MIN_VERSION -fembed-bitcode"
 export CGO_LDFLAGS="-isysroot $IPHONEOS_SDK_PATH -arch arm64 -miphoneos-version-min=$IOS_MIN_VERSION"
 
-go build -buildmode=c-archive
+go1.13beta1 build -buildmode=c-archive
 
 popd
