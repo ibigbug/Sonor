@@ -72,7 +72,7 @@ class CameraWrapper {
         }
     }
     
-    public func deviceDescription(_ cameraAddr: String) {
+    private func deviceDescription(_ cameraAddr: String) {
         guard let p = DeviceDescription(UnsafeMutablePointer(mutating: cameraAddr)) else { return }
         p.withMemoryRebound(to: DeviceDescription_t.self, capacity: 1){ ptr in
             let desc = ptr.pointee
@@ -101,7 +101,7 @@ class CameraWrapper {
         }
     }
     
-    func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = [], completion: @escaping (DataResponse<Any>) -> Void) {
+    private func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = [], completion: @escaping (DataResponse<Any>) -> Void) {
         guard let cameraAPI = CameraDescription.CameraApiUrl else { return }
         let payload: [String: Any] = [
             "method": apiName.rawValue,
@@ -115,7 +115,7 @@ class CameraWrapper {
             .responseJSON { completion($0) }
     }
     
-    func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = []) -> DataResponse<Any>? {
+    private func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = []) -> DataResponse<Any>? {
         
         let semaphore = DispatchSemaphore(value: 0)
         var rv: DataResponse<Any>? = nil
@@ -127,9 +127,9 @@ class CameraWrapper {
         return rv
     }
     
-    func getEvent(query: CameraEvent) -> String? {
+    func getEvent(query: CameraEvent, blocking: Bool = false) -> String? {
         
-        guard let response = sendRequest(.getEvent, version: "1.2", params: [false]) else { return nil }
+        guard let response = sendRequest(.getEvent, version: "1.2", params: [blocking]) else { return nil }
 
         switch response.result {
         case .failure:
@@ -182,35 +182,41 @@ class CameraWrapper {
         }
     }
     
-    func actTakePicture(completion: @escaping (String) -> Void) {
+    func actTakePicture(completion: @escaping (String?) -> Void) {
 
         guard let response = sendRequest(.actTakePicture) else { return }
         
         switch response.result {
         case .failure(let error):
             self.delegate?.errorDidThrow(.generalError(errorMessage: error.localizedDescription))
+            completion(nil)
             return
         case .success(let data):
             guard let json = data as? [String: Any] else {
                 self.delegate?.errorDidThrow(.invalidResponse)
+                completion(nil)
                 return
             }
             
             if let err = json["error"] as? [Any] {
                 guard let errorCode = err[0] as? Int else {
                     self.delegate?.errorDidThrow(.invalidResponse)
+                    completion(nil)
                     return
                 }
                 guard let errorMessage = err[1] as? String else {
                     self.delegate?.errorDidThrow(.invalidResponse)
+                    completion(nil)
                     return
                 }
                 self.delegate?.errorDidThrow(.cameraErrorResponse(code: errorCode, message: errorMessage))
+                completion(nil)
                 return
             }
             
             guard let result = json["result"] as? [[String]] else {
                 self.delegate?.errorDidThrow(.invalidResponse)
+                completion(nil)
                 return
             }
             
@@ -221,16 +227,13 @@ class CameraWrapper {
                 guard let data = try? Data(contentsOf: url) else { return }
                 guard let image = UIImage(data: data) else { return }
                 let localUrl = saveImage(image)
-                
-                DispatchQueue.main.async {
-                    completion(localUrl)
-                }
+                completion(localUrl)
             }
         }
     }
     
-    func actTakePicture() -> String {
-        var rv = ""
+    func actTakePicture() -> String? {
+        var rv: String?
         let semaphore = DispatchSemaphore(value: 0)
         
         actTakePicture {
@@ -244,39 +247,32 @@ class CameraWrapper {
         
     func actTakePicture(count: Int, completion: @escaping ([String]) -> Void) {
         DispatchQueue.global().async {
-                    
-            var cameraStatus = ""
-            repeat {
-                guard let status = self.getEvent(query: .CameraStatus) else {
-                    usleep(useconds_t(5 * second))
-                    continue
-                }
-                cameraStatus = status
-            } while cameraStatus != CameraStatusParameter.IDLE.rawValue
+            _ = self.actHalfPressShutter()
             
-            var focusStatus = ""
-            repeat {
-                _ = self.actHalfPressShutter()
-                guard let status = self.getEvent(query: .FocusStatus) else {
-                    usleep(useconds_t(5 * second))
-                    continue
-                }
-                focusStatus = status
-                usleep(useconds_t(1 * second))
-            } while focusStatus != FocusStatusParameter.Focused.rawValue
-
             var rv = [String]()
             var taken = 0
 
             repeat {
-                var localImage = self.actTakePicture()
+                var cameraStatus = ""
+                repeat {
+                    guard let status = self.getEvent(query: .CameraStatus) else {
+                        usleep(useconds_t(5 * second))
+                        continue
+                    }
+                    cameraStatus = status
+                } while cameraStatus != CameraStatusParameter.IDLE.rawValue
+
+                let localImage = self.actTakePicture()
                 let awaitLocalImage = self.awaitTakePicture()
                 _ = self.cancelHalfPressShutter()
                 
-                localImage = awaitLocalImage?[0] ?? localImage
-                rv.append(localImage)
+                guard let realImage = awaitLocalImage?[0] ?? localImage else {
+                    usleep(useconds_t(1 * second))
+                    continue
+                }
+                
+                rv.append(realImage)
                 taken += 1
-                usleep(useconds_t(1 * second))
             } while taken < count
         
             DispatchQueue.main.async {
