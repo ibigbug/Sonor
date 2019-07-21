@@ -1,1 +1,2 @@
 CameraAPI/CameraAPI.a filter=lfs diff=lfs merge=lfs -text
+CameraAPI/CameraAPI.framework/Versions/A/CameraAPI filter=lfs diff=lfs merge=lfs -text

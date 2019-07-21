@@ -1,0 +1,8 @@
+framework module "CameraAPI" {
+	header "ref.h"
+    header "CameraAPI.objc.h"
+    header "Universe.objc.h"
+    header "CameraAPI.h"
+
+    export *
+}

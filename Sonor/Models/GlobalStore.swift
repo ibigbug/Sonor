@@ -34,13 +34,7 @@ extension GlobalStore {
             CameraWrapper.shared.startDiscovery()
         }
     }
-    
-    func loadApi() {
-        DispatchQueue.global(qos: .userInitiated).async {
-            CameraWrapper.shared.loadAvailableApiList()
-        }
     }
-}
 
 extension GlobalStore: CameraAPIDelegate {
     func errorDidThrow(_ err: CameraAPIError) {

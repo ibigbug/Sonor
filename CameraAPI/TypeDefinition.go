@@ -1,6 +1,5 @@
-package main
+package CameraAPI
 
-import "C"
 import "encoding/xml"
 
 type DeviceDescriptionXML struct {
@@ -57,11 +56,11 @@ type DeviceDescriptionXML struct {
 	} `xml:"device"`
 }
 
-type TDeviceDescription struct {
-	GuideUrl         *C.char
-	SystemUrl        *C.char
-	AccessControlUrl *C.char
-	CameraUrl        *C.char
+type DeviceDescription struct {
+	GuideUrl         string
+	SystemUrl        string
+	AccessControlUrl string
+	CameraUrl        string
 }
 
 type RPCRequest struct {

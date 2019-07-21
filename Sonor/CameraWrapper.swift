@@ -73,46 +73,28 @@ class CameraWrapper {
     private init() {}
     
     public func startDiscovery() {
-        guard let p = CameraDiscovery() else { return }
-        guard let s = String(bytesNoCopy: p, length: strlen(p), encoding: .utf8, freeWhenDone: true) else { return }
-        CameraDescription.CameraLocation = s
-        deviceDescription(s)
+        let camera = CameraAPICameraDiscovery()
+        CameraDescription.CameraLocation = camera
+        deviceDescription(camera)
         
         // get camera info
         focusMode = getFocusMode()
         
         DispatchQueue.main.async {
-            self.delegate?.cameraDidDiscovery(s)
+            self.delegate?.cameraDidDiscovery(camera)
         }
     }
     
     private func deviceDescription(_ cameraAddr: String) {
-        guard let p = DeviceDescription(UnsafeMutablePointer(mutating: cameraAddr)) else { return }
-        p.withMemoryRebound(to: DeviceDescription_t.self, capacity: 1){ ptr in
-            let desc = ptr.pointee
-            CameraDescription.CameraApiUrl = String(bytesNoCopy: desc.CameraUrl, length: strlen(desc.CameraUrl), encoding: .utf8, freeWhenDone: true)
-            
-            CameraDescription.AccessControlApiUrl = String(bytesNoCopy: desc.AccessControlUrl, length: strlen(desc.AccessControlUrl), encoding: .utf8, freeWhenDone: true)
-            
-            CameraDescription.GuideApiUrl = String(bytesNoCopy: desc.GuideUrl, length: strlen(desc.GuideUrl), encoding: .utf8, freeWhenDone: true)
-            
-            CameraDescription.SystemApiUrl = String(bytesNoCopy: desc.SystemUrl, length: strlen(desc.SystemUrl), encoding: .utf8, freeWhenDone: true)
-        }
-    }
-    
-    public func loadAvailableApiList() {
-        guard let aSlice = GetAvailableApiList(UnsafeMutablePointer(mutating: CameraDescription.CameraApiUrl)) else { return }
+        guard let desc = CameraAPIGetDeviceDescription(cameraAddr) else { return }
+
+        CameraDescription.CameraApiUrl = desc.cameraUrl
         
-        aSlice.withMemoryRebound(to: SliceHeader_t.self, capacity: 1) { ptr in
-            let slice = ptr.pointee
-            let orig = Array(UnsafeBufferPointer(start: slice.Data, count: (Int)(slice.Len)))
-            let filtered = orig.compactMap{$0}
-            let apiList = filtered.map({String(bytesNoCopy: $0, length: strlen($0), encoding: .utf8, freeWhenDone: true)})
-            
-            DispatchQueue.main.async {
-                self.delegate?.availableApiDidLoad(apiList.compactMap{$0})
-            }
-        }
+        CameraDescription.AccessControlApiUrl = desc.accessControlUrl
+        
+        CameraDescription.GuideApiUrl = desc.guideUrl
+        
+        CameraDescription.SystemApiUrl = desc.systemUrl
     }
     
     private func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = [], completion: @escaping (DataResponse<Any>) -> Void) {
