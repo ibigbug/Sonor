@@ -15,6 +15,8 @@
 		421EBEF222CF14DA00CD97E4 /* GlobalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421EBEF122CF14DA00CD97E4 /* GlobalStore.swift */; };
 		421EBEF422CF151000CD97E4 /* ShootingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421EBEF322CF151000CD97E4 /* ShootingFeature.swift */; };
 		424E7BCF22CBA5CC00B627BC /* CameraWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E7BCE22CBA5CC00B627BC /* CameraWrapper.swift */; };
+		4269E0A722E47C4800D3EF36 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4269E0A622E47C4800D3EF36 /* LandingView.swift */; };
+		4269E0A922E47C8500D3EF36 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4269E0A822E47C8500D3EF36 /* SwiftUIView.swift */; };
 		4278B57122D4A9C3001F5498 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57022D4A9C3001F5498 /* GalleryView.swift */; };
 		428E95A222E38C2100038F28 /* SonorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428E95A122E38C2100038F28 /* SonorTests.swift */; };
 		428E95BC22E3980C00038F28 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 428E95BB22E3980C00038F28 /* Test.m */; };
@@ -55,6 +57,8 @@
 		421EBEF122CF14DA00CD97E4 /* GlobalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStore.swift; sourceTree = "<group>"; };
 		421EBEF322CF151000CD97E4 /* ShootingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingFeature.swift; sourceTree = "<group>"; };
 		424E7BCE22CBA5CC00B627BC /* CameraWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWrapper.swift; sourceTree = "<group>"; };
+		4269E0A622E47C4800D3EF36 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LandingView.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/LandingView.swift; sourceTree = "<group>"; };
+		4269E0A822E47C8500D3EF36 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SwiftUIView.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/SwiftUIView.swift; sourceTree = "<group>"; };
 		4278B57022D4A9C3001F5498 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		428E959F22E38C2100038F28 /* SonorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		428E95A122E38C2100038F28 /* SonorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonorTests.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				4278B57022D4A9C3001F5498 /* GalleryView.swift */,
 				428E95C522E3A14200038F28 /* ImageView.swift */,
 				428E95C722E3A15600038F28 /* ImageRowView.swift */,
+				4269E0A622E47C4800D3EF36 /* LandingView.swift */,
+				4269E0A822E47C8500D3EF36 /* SwiftUIView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -442,8 +448,10 @@
 			files = (
 				428E95C622E3A14200038F28 /* ImageView.swift in Sources */,
 				424E7BCF22CBA5CC00B627BC /* CameraWrapper.swift in Sources */,
+				4269E0A922E47C8500D3EF36 /* SwiftUIView.swift in Sources */,
 				421EBEF022CF125400CD97E4 /* ShootingFeatureList.swift in Sources */,
 				428E95C822E3A15600038F28 /* ImageRowView.swift in Sources */,
+				4269E0A722E47C4800D3EF36 /* LandingView.swift in Sources */,
 				42DA752922CB75C4002F1492 /* AppDelegate.swift in Sources */,
 				42A9CFF422CDE1C300A22C25 /* CVWrapper.mm in Sources */,
 				42DA752B22CB75C4002F1492 /* SceneDelegate.swift in Sources */,

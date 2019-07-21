@@ -34,34 +34,27 @@ struct ShootingLongExposure : View {
                 }
             }
             
-            if state.cameraFound {
-                VStack(alignment:. leading) {
-                    Text("Scenario").bold()
-                    
-                    SegmentedControl(selection: $smoothMode){
-                        ForEach(SmoothMode.allCases.identified(by: \.self)) { mode in
-                            Text(mode.rawValue).tag(mode)
-                        }
+            VStack(alignment:. leading) {
+                Text("Scenario").bold()
+                
+                SegmentedControl(selection: $smoothMode){
+                    ForEach(SmoothMode.allCases.identified(by: \.self)) { mode in
+                        Text(mode.rawValue).tag(mode)
                     }
-                    
-                    Text("Smooth Level").bold()
-                    
-                    SegmentedControl(selection: $smoothLevel){
-                        ForEach(SmoothLevel.allCases.identified(by: \.self)) { level in
-                            Text(level.rawValue).tag(level)
-                        }
-                    }
-                    
-                    Text("CV Version: \(OpenCVWrapper.openCVVersionString())")
                 }
-            }
-            else {
-                Text("Finding camera")
+                
+                Text("Smooth Level").bold()
+                
+                SegmentedControl(selection: $smoothLevel){
+                    ForEach(SmoothLevel.allCases.identified(by: \.self)) { level in
+                        Text(level.rawValue).tag(level)
+                    }
+                }
+                
+                Text("CV Version: \(OpenCVWrapper.openCVVersionString())")
             }
             
             Spacer()
-        }.onAppear {
-            self.state.findCamera()
         }
     }
     
@@ -69,7 +62,7 @@ struct ShootingLongExposure : View {
         CameraWrapper.shared.actTakePicture(count: 3) { imageUrls in
             let images = imageUrls.map{ UIImage(contentsOfFile: $0) }.compactMap{$0}
             let result = OpenCVWrapper.mergeLongExposure(images)
-            saveImage(result)
+            _ = saveImage(result)
         }
     }
 }

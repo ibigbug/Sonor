@@ -16,8 +16,8 @@ struct GalleryView: View {
                 NavigationLink(destination: ImageView().environmentObject(self.gallery)) {
                     ImageRowView(image:imageModel.image)
                 }
-            }
-        }.navigationBarTitle("Gallery")
+            }.navigationBarTitle("Gallery")
+        }
         .onAppear(perform: {
             self.gallery.loadGallery()
         })

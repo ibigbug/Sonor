@@ -12,6 +12,8 @@ struct ImageRowView : View {
     var image: UIImage
     
     var body: some View {
-        Image(uiImage: image).resizable()
+        HStack {
+            Image(uiImage: image).resizable()
+        }
     }
 }
