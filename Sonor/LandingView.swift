@@ -13,9 +13,9 @@ struct LandingView : View {
     
     var body: some View {
         if state.cameraFound {
-            ShootingLongExposure().environmentObject(state)
+            return AnyView(ShootingLongExposure().environmentObject(state))
         } else {
-            FindDevice()
+            return AnyView(FindDeviceView().environmentObject(state))
         }
     }
 }

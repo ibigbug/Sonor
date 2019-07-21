@@ -9,25 +9,10 @@
 import SwiftUI
 
 struct ContentView : View {
-    @State private var selection = 0
     @EnvironmentObject var globalStore: GlobalStore
     
     var body: some View {
-        TabbedView() {
-            ShootingLongExposure()
-                .tabItem {
-                    Image("first")
-                    Text("First")
-                }
-                .tag(0)
-            
-            GalleryView().environmentObject(GalleryStore())
-                .tabItem {
-                    Image("second")
-                    Text("Second")
-                }
-                .tag(1)
-        }
+        LandingView().environmentObject(globalStore)
     }
 }
 

@@ -8,16 +8,21 @@
 
 import SwiftUI
 
-struct SwiftUIView : View {
+struct FindDeviceView : View {
     var body: some View {
-        Text("Finding Camera")
+        VStack {
+            HStack {
+                Text("Title").bold()
+            }
+        }
     }
 }
 
 #if DEBUG
-struct SwiftUIView_Previews : PreviewProvider {
+struct FindDeviceView_Previews : PreviewProvider {
     static var previews: some View {
-        SwiftUIView()
+        FindDeviceView()
     }
 }
 #endif
+
