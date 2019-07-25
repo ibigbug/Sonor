@@ -16,7 +16,10 @@
 		4269E0A722E47C4800D3EF36 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4269E0A622E47C4800D3EF36 /* LandingView.swift */; };
 		4269E0A922E47C8500D3EF36 /* FindDeviceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4269E0A822E47C8500D3EF36 /* FindDeviceView.swift */; };
 		4269E0AB22E4854500D3EF36 /* CameraAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4269E0AA22E4854500D3EF36 /* CameraAPI.framework */; };
+		4269E0AD22E89C9E00D3EF36 /* TextWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4269E0AC22E89C9E00D3EF36 /* TextWithIcon.swift */; };
 		4278B57122D4A9C3001F5498 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57022D4A9C3001F5498 /* GalleryView.swift */; };
+		4287316822E9AD1500C898C4 /* QRCodeScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4287316722E9AD1500C898C4 /* QRCodeScan.swift */; };
+		4287316C22E9B1A400C898C4 /* QRCodeScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4287316B22E9B1A400C898C4 /* QRCodeScanVC.swift */; };
 		428E95A222E38C2100038F28 /* SonorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428E95A122E38C2100038F28 /* SonorTests.swift */; };
 		428E95BC22E3980C00038F28 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 428E95BB22E3980C00038F28 /* Test.m */; };
 		428E95C022E39AEA00038F28 /* 3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 428E95BD22E39AEA00038F28 /* 3.jpeg */; };
@@ -56,7 +59,10 @@
 		4269E0A622E47C4800D3EF36 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LandingView.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/LandingView.swift; sourceTree = "<group>"; };
 		4269E0A822E47C8500D3EF36 /* FindDeviceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FindDeviceView.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/FindDeviceView.swift; sourceTree = "<group>"; };
 		4269E0AA22E4854500D3EF36 /* CameraAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CameraAPI.framework; path = CameraAPI/CameraAPI.framework; sourceTree = "<group>"; };
+		4269E0AC22E89C9E00D3EF36 /* TextWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TextWithIcon.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/TextWithIcon.swift; sourceTree = "<group>"; };
 		4278B57022D4A9C3001F5498 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
+		4287316722E9AD1500C898C4 /* QRCodeScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRCodeScan.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/QRCodeScan.swift; sourceTree = "<group>"; };
+		4287316B22E9B1A400C898C4 /* QRCodeScanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRCodeScanVC.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/QRCodeScanVC.swift; sourceTree = "<group>"; };
 		428E959F22E38C2100038F28 /* SonorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		428E95A122E38C2100038F28 /* SonorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonorTests.swift; sourceTree = "<group>"; };
 		428E95A322E38C2100038F28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -116,6 +122,9 @@
 				428E95C722E3A15600038F28 /* ImageRowView.swift */,
 				4269E0A622E47C4800D3EF36 /* LandingView.swift */,
 				4269E0A822E47C8500D3EF36 /* FindDeviceView.swift */,
+				4269E0AC22E89C9E00D3EF36 /* TextWithIcon.swift */,
+				4287316722E9AD1500C898C4 /* QRCodeScan.swift */,
+				4287316B22E9B1A400C898C4 /* QRCodeScanVC.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -445,8 +454,10 @@
 				4269E0A922E47C8500D3EF36 /* FindDeviceView.swift in Sources */,
 				428E95C822E3A15600038F28 /* ImageRowView.swift in Sources */,
 				4269E0A722E47C4800D3EF36 /* LandingView.swift in Sources */,
+				4287316C22E9B1A400C898C4 /* QRCodeScanVC.swift in Sources */,
 				42DA752922CB75C4002F1492 /* AppDelegate.swift in Sources */,
 				42A9CFF422CDE1C300A22C25 /* CVWrapper.mm in Sources */,
+				4269E0AD22E89C9E00D3EF36 /* TextWithIcon.swift in Sources */,
 				42DA752B22CB75C4002F1492 /* SceneDelegate.swift in Sources */,
 				428E95C422E39FF700038F28 /* GalleryStore.swift in Sources */,
 				42934F0E22CF5FD300538CA1 /* ShootingLongExposure.swift in Sources */,
@@ -455,6 +466,7 @@
 				421EBEF422CF151000CD97E4 /* ShootingFeature.swift in Sources */,
 				42DA752D22CB75C4002F1492 /* ContentView.swift in Sources */,
 				421EBEE922CF07AE00CD97E4 /* CameraDescription.swift in Sources */,
+				4287316822E9AD1500C898C4 /* QRCodeScan.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,7 +663,7 @@
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "Sonor/Preview\\ Content";
 				DEVELOPMENT_TEAM = A4HU2V65N5;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -693,7 +705,7 @@
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "Sonor/Preview\\ Content";
 				DEVELOPMENT_TEAM = A4HU2V65N5;
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

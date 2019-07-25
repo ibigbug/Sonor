@@ -15,10 +15,10 @@ struct ImageModel: Hashable, Identifiable {
 }
 
 class GalleryStore: BindableObject {
-    let didChange = PassthroughSubject<GalleryStore, Never>()
+    let willChange = PassthroughSubject<GalleryStore, Never>()
     var photos: [ImageModel] = [] {
         didSet {
-            self.didChange.send(self)
+            self.willChange.send(self)
         }
     }
     

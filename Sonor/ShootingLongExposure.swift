@@ -38,7 +38,7 @@ struct ShootingLongExposure : View {
                 Text("Scenario").bold()
                 
                 SegmentedControl(selection: $smoothMode){
-                    ForEach(SmoothMode.allCases.identified(by: \.self)) { mode in
+                    ForEach(SmoothMode.allCases, id: \.self) { mode in
                         Text(mode.rawValue).tag(mode)
                     }
                 }
@@ -46,7 +46,7 @@ struct ShootingLongExposure : View {
                 Text("Smooth Level").bold()
                 
                 SegmentedControl(selection: $smoothLevel){
-                    ForEach(SmoothLevel.allCases.identified(by: \.self)) { level in
+                    ForEach(SmoothLevel.allCases, id: \.self) { level in
                         Text(level.rawValue).tag(level)
                     }
                 }
@@ -66,3 +66,12 @@ struct ShootingLongExposure : View {
         }
     }
 }
+
+#if DEBUG
+struct ShootingLongExposure_Previews : PreviewProvider {
+    static var previews: some View {
+        ShootingLongExposure()
+    }
+}
+#endif
+

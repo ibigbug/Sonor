@@ -10,18 +10,18 @@ import SwiftUI
 import Combine
 
 class GlobalStore: BindableObject {
+    let willChange = PassthroughSubject<GlobalStore, Never>()
+
     var cameraFound = false {
         didSet {
-            didChange.send(self)
+            self.willChange.send(self)
         }
     }
     var availableApiList: [String] = [] {
         didSet {
-            didChange.send(self)
+            self.willChange.send(self)
         }
     }
-    
-    var didChange = PassthroughSubject<GlobalStore, Never>()
     
     init() {
         CameraWrapper.shared.delegate = self

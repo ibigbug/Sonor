@@ -10,11 +10,31 @@ import SwiftUI
 
 struct FindDeviceView : View {
     var body: some View {
-        VStack {
-            HStack {
-                Text("Title").bold()
-            }
-        }
+        NavigationView {
+            Form {
+                Section {
+
+                    NavigationLink(destination: QRCodeScan()) {
+                        TextWithIcon(iconName: "qrcode", text: "Scan QR Code")
+                    }
+                    NavigationLink(destination: Text("NFC")) {
+                        TextWithIcon(iconName: "n.circle", text: "Connect via NFC")
+                    }
+                }
+                
+                Section {
+                    NavigationLink(destination: Text("Gallery")) {
+                        TextWithIcon(iconName: "photo.on.rectangle", text: "Gallery")
+                    }
+                }
+           
+                Section {
+                    TextWithIcon(iconName: "info.circle", text: "Help")
+                    Text("About")
+                }
+                
+            }.navigationBarTitle(Text("Connect..."))
+        }.navigationViewStyle(.stack)
     }
 }
 
