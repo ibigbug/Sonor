@@ -9,13 +9,12 @@
 import SwiftUI
 
 struct LandingView : View {
-    @EnvironmentObject var state: GlobalStore
-    
+    @ObjectBinding var findingState = FindDeviceModel()
     var body: some View {
-        if state.cameraFound {
-            return AnyView(ShootingLongExposure().environmentObject(state))
+        if findingState.cameraDiscoverStatus == .CameraFound {
+            return AnyView(ShootingLongExposure())
         } else {
-            return AnyView(FindDeviceView().environmentObject(state))
+            return AnyView(FindDeviceView(state: findingState))
         }
     }
 }

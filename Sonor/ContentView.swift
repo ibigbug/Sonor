@@ -9,10 +9,8 @@
 import SwiftUI
 
 struct ContentView : View {
-    @EnvironmentObject var globalStore: GlobalStore
-    
     var body: some View {
-        LandingView().environmentObject(globalStore)
+        ShootingLongExposure()
     }
 }
 

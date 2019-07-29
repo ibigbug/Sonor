@@ -9,8 +9,12 @@
 import SwiftUI
 
 enum SmoothMode: String, CaseIterable {
-    case Water = "Water"
+    case Water = "Water Flow"
+    case Twilight = "Twilight Reflection"
+    case Silent = "Silent"
+    case Smoke = "Smoke Haze"
 }
+
 enum SmoothLevel: String, CaseIterable {
     case Low = "Low"
     case Medium = "Medium"
@@ -22,40 +26,46 @@ struct ShootingLongExposure : View {
     @State var smoothMode: SmoothMode = .Water
     @State var smoothLevel: SmoothLevel = .Low
     
-    @EnvironmentObject var state: GlobalStore
-    
     var body: some View {
-        VStack(spacing: 20) {
-            HStack {
-                Spacer()
+        NavigationView {
+            VStack(alignment:.center) {
                 
-                Button(action: shoot) {
-                    Text("Shoot")
-                }
-            }
-            
-            VStack(alignment:. leading) {
-                Text("Scenario").bold()
-                
-                SegmentedControl(selection: $smoothMode){
-                    ForEach(SmoothMode.allCases, id: \.self) { mode in
-                        Text(mode.rawValue).tag(mode)
+                LongExposureBackground().scaledToFill()
+                    .frame(height: 200)
+                    .clipped()
+
+                Form {
+                    Section(footer: Text("Scenario Description")) {
+                        Picker(selection: $smoothMode, label: Text("Scenario"), content: {
+                            ForEach(SmoothMode.allCases, id: \.self) { mode in
+                                Text(mode.rawValue).tag(mode)
+                            }
+                        })
+                    }
+                    
+                    Section(footer: Text("Smooth Level Description")) {
+                        Picker(selection: $smoothLevel, label: Text("Smooth Level")){
+                            ForEach(SmoothLevel.allCases, id: \.self) { level in
+                                Text(level.rawValue).tag(level)
+                            }
+                        }
+                    }
+
+                    Section {
+                        Button(action: {
+                            print(self.smoothMode, self.smoothLevel)
+                        }) {
+                            Text("Start").frame(alignment: .center)
+                        }
                     }
                 }
+
                 
-                Text("Smooth Level").bold()
-                
-                SegmentedControl(selection: $smoothLevel){
-                    ForEach(SmoothLevel.allCases, id: \.self) { level in
-                        Text(level.rawValue).tag(level)
-                    }
-                }
-                
-                Text("CV Version: \(OpenCVWrapper.openCVVersionString())")
             }
-            
-            Spacer()
-        }
+            .navigationBarTitle("Long Exposure")
+            .edgesIgnoringSafeArea(.top)
+
+        }.navigationViewStyle(.stack)
     }
     
     private func shoot() {
@@ -64,6 +74,12 @@ struct ShootingLongExposure : View {
             let result = OpenCVWrapper.mergeLongExposure(images)
             _ = saveImage(result)
         }
+    }
+}
+
+struct LongExposureBackground: View {
+    var body: some View {
+        Image("long-exposure-bg").resizable()
     }
 }
 

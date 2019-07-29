@@ -54,7 +54,6 @@ protocol CameraAPIDelegate: AnyObject {
 }
 
 extension CameraAPIDelegate {
-    func availableApiDidLoad(_ apiList: [String]) {}
     func pictureDidTake(_ pictureUrl: String) {}
     func pictureDidSave(_ pictureLocalPath: String) {}
 }

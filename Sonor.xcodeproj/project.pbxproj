@@ -10,7 +10,7 @@
 		142994A0C3C23817D146D161 /* libPods-SonorTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADAACE5512369E8A0734D1E0 /* libPods-SonorTests.a */; };
 		3AC382B181B832AA99281399 /* Pods_Sonor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389058836357A536F595BEE9 /* Pods_Sonor.framework */; };
 		421EBEE922CF07AE00CD97E4 /* CameraDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421EBEE822CF07AE00CD97E4 /* CameraDescription.swift */; };
-		421EBEF222CF14DA00CD97E4 /* GlobalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421EBEF122CF14DA00CD97E4 /* GlobalStore.swift */; };
+		421EBEF222CF14DA00CD97E4 /* FindDeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421EBEF122CF14DA00CD97E4 /* FindDeviceModel.swift */; };
 		421EBEF422CF151000CD97E4 /* ShootingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421EBEF322CF151000CD97E4 /* ShootingFeature.swift */; };
 		424E7BCF22CBA5CC00B627BC /* CameraWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424E7BCE22CBA5CC00B627BC /* CameraWrapper.swift */; };
 		4269E0A722E47C4800D3EF36 /* LandingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4269E0A622E47C4800D3EF36 /* LandingView.swift */; };
@@ -20,6 +20,9 @@
 		4278B57122D4A9C3001F5498 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57022D4A9C3001F5498 /* GalleryView.swift */; };
 		4287316822E9AD1500C898C4 /* QRCodeScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4287316722E9AD1500C898C4 /* QRCodeScan.swift */; };
 		4287316C22E9B1A400C898C4 /* QRCodeScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4287316B22E9B1A400C898C4 /* QRCodeScanVC.swift */; };
+		4287316F22E9C57800C898C4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4287316E22E9C57800C898C4 /* NetworkExtension.framework */; };
+		4287317122ECDD6E00C898C4 /* QRCodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4287317022ECDD6E00C898C4 /* QRCodeParser.swift */; };
+		4287317422ECE15600C898C4 /* SystemActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4287317322ECE15600C898C4 /* SystemActions.swift */; };
 		428E95A222E38C2100038F28 /* SonorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428E95A122E38C2100038F28 /* SonorTests.swift */; };
 		428E95BC22E3980C00038F28 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 428E95BB22E3980C00038F28 /* Test.m */; };
 		428E95C022E39AEA00038F28 /* 3.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 428E95BD22E39AEA00038F28 /* 3.jpeg */; };
@@ -53,7 +56,7 @@
 		353D2BCB98B608029DE85191 /* Pods-Sonor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sonor.release.xcconfig"; path = "Target Support Files/Pods-Sonor/Pods-Sonor.release.xcconfig"; sourceTree = "<group>"; };
 		389058836357A536F595BEE9 /* Pods_Sonor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sonor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		421EBEE822CF07AE00CD97E4 /* CameraDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraDescription.swift; sourceTree = "<group>"; };
-		421EBEF122CF14DA00CD97E4 /* GlobalStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalStore.swift; sourceTree = "<group>"; };
+		421EBEF122CF14DA00CD97E4 /* FindDeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindDeviceModel.swift; sourceTree = "<group>"; };
 		421EBEF322CF151000CD97E4 /* ShootingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingFeature.swift; sourceTree = "<group>"; };
 		424E7BCE22CBA5CC00B627BC /* CameraWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraWrapper.swift; sourceTree = "<group>"; };
 		4269E0A622E47C4800D3EF36 /* LandingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LandingView.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/LandingView.swift; sourceTree = "<group>"; };
@@ -63,6 +66,10 @@
 		4278B57022D4A9C3001F5498 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		4287316722E9AD1500C898C4 /* QRCodeScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRCodeScan.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/QRCodeScan.swift; sourceTree = "<group>"; };
 		4287316B22E9B1A400C898C4 /* QRCodeScanVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRCodeScanVC.swift; path = ../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/QRCodeScanVC.swift; sourceTree = "<group>"; };
+		4287316D22E9C57800C898C4 /* Sonor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sonor.entitlements; sourceTree = "<group>"; };
+		4287316E22E9C57800C898C4 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		4287317022ECDD6E00C898C4 /* QRCodeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = QRCodeParser.swift; path = ../../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/Models/QRCodeParser.swift; sourceTree = "<group>"; };
+		4287317322ECE15600C898C4 /* SystemActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SystemActions.swift; path = ../../../../../../../System/Volumes/Data/Users/yuweiba/workplace/projects/Sonor/Sonor/Actions/SystemActions.swift; sourceTree = "<group>"; };
 		428E959F22E38C2100038F28 /* SonorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		428E95A122E38C2100038F28 /* SonorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonorTests.swift; sourceTree = "<group>"; };
 		428E95A322E38C2100038F28 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -106,6 +113,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4269E0AB22E4854500D3EF36 /* CameraAPI.framework in Frameworks */,
+				4287316F22E9C57800C898C4 /* NetworkExtension.framework in Frameworks */,
 				3AC382B181B832AA99281399 /* Pods_Sonor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -132,9 +140,10 @@
 		421EBEEE22CF10F500CD97E4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				421EBEF122CF14DA00CD97E4 /* GlobalStore.swift */,
+				421EBEF122CF14DA00CD97E4 /* FindDeviceModel.swift */,
 				421EBEF322CF151000CD97E4 /* ShootingFeature.swift */,
 				428E95C322E39FF700038F28 /* GalleryStore.swift */,
+				4287317022ECDD6E00C898C4 /* QRCodeParser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -152,6 +161,7 @@
 		424E7BC222CBA09900B627BC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4287316E22E9C57800C898C4 /* NetworkExtension.framework */,
 				4269E0AA22E4854500D3EF36 /* CameraAPI.framework */,
 				42A9CFEF22CDE17A00A22C25 /* Sonor-Bridging-Header.h */,
 				389058836357A536F595BEE9 /* Pods_Sonor.framework */,
@@ -167,6 +177,14 @@
 				421EBEE822CF07AE00CD97E4 /* CameraDescription.swift */,
 			);
 			name = CameraAPI;
+			sourceTree = "<group>";
+		};
+		4287317222ECE13200C898C4 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				4287317322ECE15600C898C4 /* SystemActions.swift */,
+			);
+			path = Actions;
 			sourceTree = "<group>";
 		};
 		428E95A022E38C2100038F28 /* SonorTests */ = {
@@ -214,6 +232,8 @@
 		42DA752722CB75C4002F1492 /* Sonor */ = {
 			isa = PBXGroup;
 			children = (
+				4287317222ECE13200C898C4 /* Actions */,
+				4287316D22E9C57800C898C4 /* Sonor.entitlements */,
 				421EBEF522CF16B000CD97E4 /* Bridges */,
 				421EBEEE22CF10F500CD97E4 /* Models */,
 				421EBEEA22CF106300CD97E4 /* Views */,
@@ -278,8 +298,8 @@
 				42DA752122CB75C4002F1492 /* Sources */,
 				42DA752222CB75C4002F1492 /* Frameworks */,
 				42DA752322CB75C4002F1492 /* Resources */,
-				421EBEF822CF3BAC00CD97E4 /* Run Fabric Script */,
 				DE34DCF394C52DC1A4683E6A /* [CP] Embed Pods Frameworks */,
+				421EBEF822CF3BAC00CD97E4 /* Run Fabric Script */,
 			);
 			buildRules = (
 			);
@@ -449,6 +469,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4287317422ECE15600C898C4 /* SystemActions.swift in Sources */,
 				428E95C622E3A14200038F28 /* ImageView.swift in Sources */,
 				424E7BCF22CBA5CC00B627BC /* CameraWrapper.swift in Sources */,
 				4269E0A922E47C8500D3EF36 /* FindDeviceView.swift in Sources */,
@@ -456,12 +477,13 @@
 				4269E0A722E47C4800D3EF36 /* LandingView.swift in Sources */,
 				4287316C22E9B1A400C898C4 /* QRCodeScanVC.swift in Sources */,
 				42DA752922CB75C4002F1492 /* AppDelegate.swift in Sources */,
+				4287317122ECDD6E00C898C4 /* QRCodeParser.swift in Sources */,
 				42A9CFF422CDE1C300A22C25 /* CVWrapper.mm in Sources */,
 				4269E0AD22E89C9E00D3EF36 /* TextWithIcon.swift in Sources */,
 				42DA752B22CB75C4002F1492 /* SceneDelegate.swift in Sources */,
 				428E95C422E39FF700038F28 /* GalleryStore.swift in Sources */,
 				42934F0E22CF5FD300538CA1 /* ShootingLongExposure.swift in Sources */,
-				421EBEF222CF14DA00CD97E4 /* GlobalStore.swift in Sources */,
+				421EBEF222CF14DA00CD97E4 /* FindDeviceModel.swift in Sources */,
 				4278B57122D4A9C3001F5498 /* GalleryView.swift in Sources */,
 				421EBEF422CF151000CD97E4 /* ShootingFeature.swift in Sources */,
 				42DA752D22CB75C4002F1492 /* ContentView.swift in Sources */,
@@ -659,6 +681,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Sonor/Sonor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "Sonor/Preview\\ Content";
@@ -701,6 +724,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Sonor/Sonor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_ASSET_PATHS = "Sonor/Preview\\ Content";

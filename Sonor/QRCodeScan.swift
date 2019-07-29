@@ -6,10 +6,11 @@
 //  Copyright © 2019 Watfaq. All rights reserved.
 //
 
-import AVFoundation
 import SwiftUI
 
 struct QRCodeScan: UIViewControllerRepresentable {
+    
+    @ObjectBinding var state: FindDeviceModel
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -27,7 +28,7 @@ struct QRCodeScan: UIViewControllerRepresentable {
     class Coordinator: NSObject, QRCodeScannerDelegate {
         
         func codeDidFind(_ code: String) {
-            print(code)
+            parent.state.codeDidFind(code)
         }
         
         var parent: QRCodeScan
@@ -37,11 +38,3 @@ struct QRCodeScan: UIViewControllerRepresentable {
         }
     }
 }
-
-#if DEBUG
-struct QRCodeScan_Previews: PreviewProvider {
-    static var previews: some View {
-        QRCodeScan()
-    }
-}
-#endif

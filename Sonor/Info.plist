@@ -4,6 +4,8 @@
 <dict>
 	<key>NSCameraUsageDescription</key>
 	<string>We need to access your camera for scanning QR Code.</string>
+	<key>NFCReaderUsageDescription</key>
+	<string>We need to connect the camera via NFC</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

@@ -9,16 +9,21 @@
 import SwiftUI
 
 struct FindDeviceView : View {
+    
+    @ObjectBinding var state: FindDeviceModel
+    
     var body: some View {
         NavigationView {
             Form {
-                Section {
+                if state.cameraDiscoverStatus != .CameraFound {
+                    Section {
 
-                    NavigationLink(destination: QRCodeScan()) {
-                        TextWithIcon(iconName: "qrcode", text: "Scan QR Code")
-                    }
-                    NavigationLink(destination: Text("NFC")) {
-                        TextWithIcon(iconName: "n.circle", text: "Connect via NFC")
+                        NavigationLink(destination: QRCodeScan(state: state)) {
+                            TextWithIcon(iconName: "qrcode", text: "QR Code")
+                        }
+                        NavigationLink(destination: Text("NFC")) {
+                            TextWithIcon(iconName: "n.circle", text: "Tap NFC")
+                        }
                     }
                 }
                 
@@ -33,7 +38,7 @@ struct FindDeviceView : View {
                     Text("About")
                 }
                 
-            }.navigationBarTitle(Text("Connect..."))
+            }.navigationBarTitle(Text(self.state.cameraDiscoverStatus.rawValue))
         }.navigationViewStyle(.stack)
     }
 }
@@ -41,7 +46,7 @@ struct FindDeviceView : View {
 #if DEBUG
 struct FindDeviceView_Previews : PreviewProvider {
     static var previews: some View {
-        FindDeviceView()
+        FindDeviceView(state: FindDeviceModel())
     }
 }
 #endif
