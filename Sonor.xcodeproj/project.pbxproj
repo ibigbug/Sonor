@@ -684,6 +684,7 @@
 				CODE_SIGN_ENTITLEMENTS = Sonor/Sonor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "Sonor/Preview\\ Content";
 				DEVELOPMENT_TEAM = A4HU2V65N5;
 				ENABLE_BITCODE = NO;
