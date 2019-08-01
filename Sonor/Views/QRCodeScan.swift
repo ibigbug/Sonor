@@ -10,7 +10,7 @@ import SwiftUI
 
 struct QRCodeScan: UIViewControllerRepresentable {
     
-    @ObjectBinding var state: FindDeviceModel
+    @ObservedObject var state: FindDeviceModel
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)

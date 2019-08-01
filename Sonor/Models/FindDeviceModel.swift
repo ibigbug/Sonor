@@ -16,14 +16,9 @@ enum CameraDiscoveryStatus: String {
     case CameraFound = "Connected."
 }
 
-class FindDeviceModel: BindableObject {
-    let willChange = PassthroughSubject<FindDeviceModel, Never>()
+class FindDeviceModel: ObservableObject {
     
-    var cameraDiscoverStatus = CameraDiscoveryStatus.NotFound {
-        didSet {
-            willChange.send(self)
-        }
-    }
+    @Published var cameraDiscoverStatus = CameraDiscoveryStatus.NotFound
     
     init() {
         CameraWrapper.shared.delegate = self

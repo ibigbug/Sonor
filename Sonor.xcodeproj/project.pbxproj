@@ -166,15 +166,11 @@
 		4264277422EF33C6004278BA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				42ACA1A622F322D500896698 /* Scanner */,
+				42ACA1A322F3228600896698 /* Gallery */,
 				42934F0D22CF5FD300538CA1 /* ShootingLongExposure.swift */,
-				4278B57022D4A9C3001F5498 /* GalleryView.swift */,
-				4264277B22EF33D1004278BA /* ImageView.swift */,
-				4264277722EF33D0004278BA /* ImageRowView.swift */,
 				4264277622EF33D0004278BA /* LandingView.swift */,
-				4264277522EF33D0004278BA /* FindDeviceView.swift */,
 				4264277A22EF33D1004278BA /* TextWithIcon.swift */,
-				4264277822EF33D0004278BA /* QRCodeScan.swift */,
-				4264277922EF33D0004278BA /* QRCodeScanVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +203,26 @@
 				428E95BD22E39AEA00038F28 /* 3.jpeg */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		42ACA1A322F3228600896698 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				4278B57022D4A9C3001F5498 /* GalleryView.swift */,
+				4264277B22EF33D1004278BA /* ImageView.swift */,
+				4264277722EF33D0004278BA /* ImageRowView.swift */,
+			);
+			name = Gallery;
+			sourceTree = "<group>";
+		};
+		42ACA1A622F322D500896698 /* Scanner */ = {
+			isa = PBXGroup;
+			children = (
+				4264277522EF33D0004278BA /* FindDeviceView.swift */,
+				4264277822EF33D0004278BA /* QRCodeScan.swift */,
+				4264277922EF33D0004278BA /* QRCodeScanVC.swift */,
+			);
+			name = Scanner;
 			sourceTree = "<group>";
 		};
 		42DA751C22CB75C4002F1492 = {

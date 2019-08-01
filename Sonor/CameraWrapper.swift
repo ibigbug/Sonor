@@ -23,6 +23,16 @@ enum AvailableCameraAPI: String {
     case actTakePicture = "actTakePicture"
     case awaitTakePicture = "awaitTakePicture"
     case getFocusMode = "getFocusMode"
+    case setFNumber = "setFNumber"
+    case getFNumber = "getFNumber"
+    case setShootMode = "setShootMode"
+    case getShootMode = "getShootMode"
+    case setExposureMode = "setExposureMode"
+    case getExposureMode = "getExposureMode"
+    case setIsoSpeedRate = "setIsoSpeedRate"
+    case getIsoSpeedRate = "getIsoSpeedRate"
+    case setWhiteBalance = "setWhiteBalance"
+    case getWhiteBalance = "getWhiteBalance"
 }
 
 enum CameraEvent: String {
@@ -35,6 +45,19 @@ enum FocusStatusParameter: String {
     case Focusing = "Focusing"
     case Focused = "Focused"
     case Failed = "Failed"
+}
+
+enum ExposureModeParameter: String {
+    case ProgramAuto = "Program Auto"
+    case Aperture = "Aperture"
+    case Shutter = "Shutter"
+    case Manual = "Manual"
+    case IntelligentAuto = "Intelligent Auto"
+    case SuperiorAuto = "Superior Auto"
+}
+
+enum WhiteBalanceModeParameter: String {
+    case Auto = "Auto WB"
 }
 
 enum CameraStatusParameter: String {
@@ -120,6 +143,18 @@ class CameraWrapper {
         }
         semaphore.wait()
         return rv
+    }
+ 
+    
+    func simpleSend(_ api: AvailableCameraAPI, version: String = "1.0", params: [Any] = []) -> Bool {
+        guard let res = sendRequest(api, version: version, params: params) else { return false }
+        
+        switch res.result {
+        case .success:
+            return true
+        case .failure:
+            return false
+        }
     }
     
     func getEvent(query: CameraEvent, blocking: Bool = false) -> String? {

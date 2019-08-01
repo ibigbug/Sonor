@@ -14,13 +14,8 @@ struct ImageModel: Hashable, Identifiable {
     var image: UIImage
 }
 
-class GalleryStore: BindableObject {
-    let willChange = PassthroughSubject<GalleryStore, Never>()
-    var photos: [ImageModel] = [] {
-        didSet {
-            self.willChange.send(self)
-        }
-    }
+class GalleryStore: ObservableObject {
+    @Published var photos: [ImageModel] = []
     
     func loadGallery() {
         let fileManager = FileManager.default

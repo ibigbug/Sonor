@@ -8,27 +8,17 @@
 
 import SwiftUI
 
-enum SmoothMode: String, CaseIterable {
-    case Water = "Water Flow"
-    case Twilight = "Twilight Reflection"
-    case Silent = "Silent"
-    case Smoke = "Smoke Haze"
-}
-
-enum SmoothLevel: String, CaseIterable {
-    case Low = "Low"
-    case Medium = "Medium"
-    case High = "High"
-}
+let supportedShotNumbers = (0...8).map{pow(2, $0)}
 
 struct ShootingLongExposure : View {
 
-    @State var smoothMode: SmoothMode = .Water
+    @State var smoothMode: ExposureScenario = .WaterFlow
     @State var smoothLevel: SmoothLevel = .Low
+    @State var shotNumber: Int = 64
     
     var body: some View {
         NavigationView {
-            VStack(alignment:.center) {
+            VStack(alignment: .center) {
                 
                 LongExposureBackground().scaledToFill()
                     .frame(height: 200)
@@ -37,12 +27,12 @@ struct ShootingLongExposure : View {
                 Form {
                     Section(footer: Text("Scenario Description")) {
                         Picker(selection: $smoothMode, label: Text("Scenario"), content: {
-                            ForEach(SmoothMode.allCases, id: \.self) { mode in
+                            ForEach(ExposureScenario.allCases, id: \.self) { mode in
                                 Text(mode.rawValue).tag(mode)
                             }
                         })
                     }
-                    
+                                        
                     Section(footer: Text("Smooth Level Description")) {
                         Picker(selection: $smoothLevel, label: Text("Smooth Level")){
                             ForEach(SmoothLevel.allCases, id: \.self) { level in
@@ -50,7 +40,15 @@ struct ShootingLongExposure : View {
                             }
                         }
                     }
-
+                    
+                    Section {
+                        Picker(selection: $shotNumber, label: Text("Shot Number")) {
+                            ForEach(supportedShotNumbers, id: \.self) {
+                                Text(String($0)).tag($0)
+                            }
+                        }
+                    }
+                                        
                     Section {
                         Button(action: {
                             print(self.smoothMode, self.smoothLevel)
@@ -65,11 +63,11 @@ struct ShootingLongExposure : View {
             .navigationBarTitle("Long Exposure")
             .edgesIgnoringSafeArea(.top)
 
-        }.navigationViewStyle(.stack)
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
     
     private func shoot() {
-        CameraWrapper.shared.actTakePicture(count: 3) { imageUrls in
+        CameraWrapper.shared.actTakePicture(count: shotNumber) { imageUrls in
             let images = imageUrls.map{ UIImage(contentsOfFile: $0) }.compactMap{$0}
             let result = OpenCVWrapper.mergeLongExposure(images)
             _ = saveImage(result)

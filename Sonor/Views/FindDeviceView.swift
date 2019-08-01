@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FindDeviceView : View {
     
-    @ObjectBinding var state: FindDeviceModel
+    @ObservedObject var state: FindDeviceModel
     
     var body: some View {
         NavigationView {
@@ -39,7 +39,7 @@ struct FindDeviceView : View {
                 }
                 
             }.navigationBarTitle(Text(self.state.cameraDiscoverStatus.rawValue))
-        }.navigationViewStyle(.stack)
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
