@@ -21,6 +21,7 @@
 		4264278122EF346F004278BA /* QRCodeScan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264277822EF33D0004278BA /* QRCodeScan.swift */; };
 		4264278222EF3473004278BA /* QRCodeScanVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4264277922EF33D0004278BA /* QRCodeScanVC.swift */; };
 		4269E0AB22E4854500D3EF36 /* CameraAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4269E0AA22E4854500D3EF36 /* CameraAPI.framework */; };
+		4275CAD62301C1EC00CDF1D9 /* ShootingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4275CAD52301C1EC00CDF1D9 /* ShootingModel.swift */; };
 		4278B57122D4A9C3001F5498 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4278B57022D4A9C3001F5498 /* GalleryView.swift */; };
 		4287316F22E9C57800C898C4 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4287316E22E9C57800C898C4 /* NetworkExtension.framework */; };
 		4287317122ECDD6E00C898C4 /* QRCodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4287317022ECDD6E00C898C4 /* QRCodeParser.swift */; };
@@ -67,6 +68,7 @@
 		4264277A22EF33D1004278BA /* TextWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextWithIcon.swift; sourceTree = "<group>"; };
 		4264277B22EF33D1004278BA /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		4269E0AA22E4854500D3EF36 /* CameraAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CameraAPI.framework; path = CameraAPI/CameraAPI.framework; sourceTree = "<group>"; };
+		4275CAD52301C1EC00CDF1D9 /* ShootingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShootingModel.swift; sourceTree = "<group>"; };
 		4278B57022D4A9C3001F5498 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		4287316D22E9C57800C898C4 /* Sonor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sonor.entitlements; sourceTree = "<group>"; };
 		4287316E22E9C57800C898C4 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
@@ -128,6 +130,7 @@
 				421EBEF322CF151000CD97E4 /* ShootingFeature.swift */,
 				428E95C322E39FF700038F28 /* GalleryStore.swift */,
 				4287317022ECDD6E00C898C4 /* QRCodeParser.swift */,
+				4275CAD52301C1EC00CDF1D9 /* ShootingModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				4264278222EF3473004278BA /* QRCodeScanVC.swift in Sources */,
 				4287317422ECE15600C898C4 /* SystemActions.swift in Sources */,
 				4264277F22EF3469004278BA /* FindDeviceView.swift in Sources */,
+				4275CAD62301C1EC00CDF1D9 /* ShootingModel.swift in Sources */,
 				424E7BCF22CBA5CC00B627BC /* CameraWrapper.swift in Sources */,
 				42DA752922CB75C4002F1492 /* AppDelegate.swift in Sources */,
 				4264277E22EF3465004278BA /* LandingView.swift in Sources */,

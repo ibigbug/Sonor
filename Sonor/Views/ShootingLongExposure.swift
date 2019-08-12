@@ -8,10 +8,11 @@
 
 import SwiftUI
 
-let supportedShotNumbers = (0...8).map{pow(2, $0)}
+let SupportedShotNumbers: [Int] = (0...8).map{(pow(2, $0) as NSDecimalNumber).intValue}
 
 struct ShootingLongExposure : View {
 
+    @ObservedObject var shootingModel: ShootingModel
     @State var smoothMode: ExposureScenario = .WaterFlow
     @State var smoothLevel: SmoothLevel = .Low
     @State var shotNumber: Int = 64
@@ -43,8 +44,8 @@ struct ShootingLongExposure : View {
                     
                     Section {
                         Picker(selection: $shotNumber, label: Text("Shot Number")) {
-                            ForEach(supportedShotNumbers, id: \.self) {
-                                Text(String($0)).tag($0)
+                            ForEach(SupportedShotNumbers, id: \.self) { num in
+                                Text(String(num)).tag(num)
                             }
                         }
                     }
@@ -67,11 +68,7 @@ struct ShootingLongExposure : View {
     }
     
     private func shoot() {
-        CameraWrapper.shared.actTakePicture(count: shotNumber) { imageUrls in
-            let images = imageUrls.map{ UIImage(contentsOfFile: $0) }.compactMap{$0}
-            let result = OpenCVWrapper.mergeLongExposure(images)
-            _ = saveImage(result)
-        }
+        shootingModel.startShooting(shotNumber, scenario: smoothMode)
     }
 }
 
@@ -84,7 +81,7 @@ struct LongExposureBackground: View {
 #if DEBUG
 struct ShootingLongExposure_Previews : PreviewProvider {
     static var previews: some View {
-        ShootingLongExposure()
+        ShootingLongExposure(shootingModel: ShootingModel())
     }
 }
 #endif

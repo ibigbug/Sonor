@@ -33,6 +33,10 @@ enum AvailableCameraAPI: String {
     case getIsoSpeedRate = "getIsoSpeedRate"
     case setWhiteBalance = "setWhiteBalance"
     case getWhiteBalance = "getWhiteBalance"
+    case setContShootingMode = "setContShootingMode"
+    case getContShootingMode = "getContShootingMode"
+    case setIntervalTime = "setIntervalTime"
+    case getIntervalTime = "getIntervalTime"
 }
 
 enum CameraEvent: String {
@@ -69,6 +73,19 @@ enum FocusModeParameter: String {
     case AFC = "AF-C"
     case DMF = "DMF"
     case MF = "MF"
+}
+
+enum ContinuousShootingModeParameter: String {
+    case Continuous = "Continuous"
+}
+
+enum IntervalTimeParameter: String {
+    case One = "1"
+    case Two = "2"
+    case Five = "5"
+    case Ten = "10"
+    case Thirty = "30"
+    case Sixty = "60"
 }
 
 protocol CameraAPIDelegate: AnyObject {
@@ -295,7 +312,7 @@ class CameraWrapper {
         return rv
     }
         
-    func actTakePicture(count: Int, completion: @escaping ([String]) -> Void) {
+    func actTakePicture(count: Int, intervalSec: Int = 1, completion: @escaping ([String]) -> Void) {
         DispatchQueue.global().async {
             if self.focusMode == .AFC || self.focusMode == .AFS {
                 _ = self.actHalfPressShutter()
@@ -319,7 +336,7 @@ class CameraWrapper {
                 _ = self.cancelHalfPressShutter()
                 
                 guard let realImage = awaitLocalImage?[0] ?? localImage else {
-                    usleep(useconds_t(1 * second))
+                    usleep(useconds_t(intervalSec * second))
                     continue
                 }
                 
@@ -367,6 +384,13 @@ class CameraWrapper {
     }
 }
 
+extension CameraWrapper {
+    func setUpCameraSettings(_ settings: CameraSetting) {
+        _ = simpleSend(.setFNumber, params: [settings.aperture])
+        _ = simpleSend(.setIsoSpeedRate, params: [settings.ISO])
+        _ = simpleSend(.setExposureMode, params: [settings.exposureMode.rawValue])
+    }
+}
 func getDirectoryPath() -> String {
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     return paths[0].path

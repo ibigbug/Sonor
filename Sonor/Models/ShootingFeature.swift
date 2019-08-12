@@ -24,6 +24,7 @@ struct CameraSetting {
     var ISO: String
     var whiteBalance: WhiteBalanceModeParameter
     var aperture: String
+    var intervalSec: Int
 }
 
 enum ExposureScenario: String, CaseIterable, Hashable {
@@ -41,7 +42,7 @@ enum SmoothLevel: String, CaseIterable {
 
 
 let ScenarioPreset: [ExposureScenario: CameraSetting] = [
-    ExposureScenario.WaterFlow: CameraSetting(exposureMode: ExposureModeParameter.Aperture, ISO: "100", whiteBalance: WhiteBalanceModeParameter.Auto, aperture: "11")
+    ExposureScenario.WaterFlow: CameraSetting(exposureMode: ExposureModeParameter.Aperture, ISO: "100", whiteBalance: WhiteBalanceModeParameter.Auto, aperture: "11", intervalSec: 5)
 ]
 
 

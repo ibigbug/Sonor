@@ -10,10 +10,11 @@ import SwiftUI
 
 struct LandingView : View {
     @ObservedObject var findingState = FindDeviceModel()
+    @ObservedObject var shootingModel = ShootingModel()
     
     var body: some View {
         if findingState.cameraDiscoverStatus == .CameraFound {
-            return AnyView(ShootingLongExposure())
+            return AnyView(ShootingLongExposure(shootingModel: shootingModel))
         } else {
             return AnyView(FindDeviceView(state: findingState))
         }

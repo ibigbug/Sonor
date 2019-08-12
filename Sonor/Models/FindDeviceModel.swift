@@ -31,7 +31,7 @@ extension FindDeviceModel {
             CameraWrapper.shared.startDiscovery()
         }
     }
-    }
+}
 
 extension FindDeviceModel: CameraAPIDelegate {
     func errorDidThrow(_ err: CameraAPIError) {
