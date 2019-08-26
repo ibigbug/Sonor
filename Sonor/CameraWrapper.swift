@@ -37,6 +37,8 @@ enum AvailableCameraAPI: String {
     case getContShootingMode = "getContShootingMode"
     case setIntervalTime = "setIntervalTime"
     case getIntervalTime = "getIntervalTime"
+    case getContentCount = "getContentCount"
+    case getContentList = "getContentList"
 }
 
 enum CameraEvent: String {
@@ -136,8 +138,8 @@ class CameraWrapper {
         CameraDescription.SystemApiUrl = desc.systemUrl
     }
     
-    private func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = [], completion: @escaping (DataResponse<Any>) -> Void) {
-        guard let cameraAPI = CameraDescription.CameraApiUrl else { return }
+    private func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = [], endpoint: String = "camera", completion: @escaping (DataResponse<Any>) -> Void) {
+        guard let cameraLocation = CameraDescription.CameraLocation else { return }
         let payload: [String: Any] = [
             "method": apiName.rawValue,
             "params": params,
@@ -145,16 +147,16 @@ class CameraWrapper {
             "version": version
         ]
         
-        AF.request(cameraAPI, method: .post, parameters: payload, encoding: JSONEncoding.default)
+        AF.request(cameraLocation + endpoint, method: .post, parameters: payload, encoding: JSONEncoding.default)
             .validate(statusCode: 200..<300)
             .responseJSON { completion($0) }
     }
     
-    private func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = []) -> DataResponse<Any>? {
+    private func sendRequest(_ apiName: AvailableCameraAPI, version: String = "1.0", params: [Any] = [], endpoint: String = "camera") -> DataResponse<Any>? {
         
         let semaphore = DispatchSemaphore(value: 0)
         var rv: DataResponse<Any>? = nil
-        sendRequest(apiName, version: version, params: params) {
+        sendRequest(apiName, version: version, params: params, endpoint: endpoint) {
             rv = $0
             semaphore.signal()
         }
@@ -171,6 +173,57 @@ class CameraWrapper {
             return true
         case .failure:
             return false
+        }
+    }
+    
+    func getContentCount() -> Int {
+        guard let response = sendRequest(.getContentCount, version: "1.2", params: [
+            [
+                "uri": "storage:memoryCard1",
+                "target": "all",
+                "view": "date",
+            ]
+        ], endpoint: "avContent") else { return 0}
+        
+        switch response.result {
+        case .failure:
+            return 0
+        case .success(let data):
+            guard let json = data as? [String: Any] else { return 0 }
+            
+            if let result = json["result"] as? [[String: Int]] {
+                guard let count = result[0]["count"] else { return 0 }
+                return count
+            }
+            return 0
+        }
+    }
+    
+    func getContentList(startIndex: Int, count: Int) -> [String] {
+        guard let response = sendRequest(.getContentList, version: "1.3", params: [
+            [
+                "uri": "storage:memoryCard1",
+                "stIdx": startIndex,
+                "cnt": count,
+                "view": "date",
+                "sort": "descending",
+                "type": [ "still" ]
+            ]
+        ], endpoint: "avContent") else { return [] }
+        
+        switch response.result {
+        case .failure:
+            return []
+        case .success(let data):
+            guard let json = data as? [String: Any] else { return [] }
+            guard let result = json["result"] as? [[[String: Any]]] else { return [] }
+            
+            return result[0].map{
+                guard let content = $0["coutent"] as? [String: Any] else { return nil }
+                guard let original = content["original"] as? [[String: String]] else { return nil }
+                guard let url = original[0]["url"] else { return nil }
+                return url
+            }.compactMap{$0}
         }
     }
     

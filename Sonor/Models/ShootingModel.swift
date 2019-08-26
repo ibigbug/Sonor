@@ -15,10 +15,17 @@ class ShootingModel: ObservableObject {
     func startShooting(_ count: Int, scenario: ExposureScenario) {
         guard let cameraSetting = ScenarioPreset[scenario] else { return }
         CameraWrapper.shared.setUpCameraSettings(cameraSetting)
-        CameraWrapper.shared.actTakePicture(count: count, intervalSec: cameraSetting.intervalSec) { imageUrls in
-               let images = imageUrls.map{ UIImage(contentsOfFile: $0) }.compactMap{$0}
-               let result = OpenCVWrapper.mergeLongExposure(images)
+        
+        let imageCount = CameraWrapper.shared.getContentCount()
+        CameraWrapper.shared.actTakePicture(count: count, intervalSec: cameraSetting.intervalSec) { _ in
+            let imageUrls = CameraWrapper.shared.getContentList(startIndex: imageCount, count: count)
+            let images = imageUrls.map{ UIImage(contentsOfFile: $0) }.compactMap{$0}
+            let result = OpenCVWrapper.mergeLongExposure(images)
             self.longExposureResult = saveImage(result)
         }
+    }
+    
+    func retriveImages(_count: Int, start: Int) {
+        
     }
 }
